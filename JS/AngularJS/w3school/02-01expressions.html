@@ -1,0 +1,22 @@
+<!--
+AngularJS Expressions vs. JavaScript Expressions
+Like JavaScript expressions, AngularJS expressions can contain literals, operators, and variables.
+Unlike JavaScript expressions, AngularJS expressions can be written inside HTML.
+Unlike JavaScript expressions, AngularJS expressions do not support conditionals, loops, or exceptions.
+Unlike JavaScript expressions, AngularJS expressions support filters.
+-->
+
+<!--
+AngularJS numbers are like JavaScript numbers:
+-->
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body>
+
+<div ng-app="" ng-init="quantity=2;cost=5">
+<p>Total in dollar: {{ quantity * cost }}</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!--
+A filter can be added to a directive with a pipe character (|) and a filter.
+The orderBy filter orders an array by an expression:
+-->
+<!DOCTYPE html>
+<html>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="../angular-1.4.3/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="namesCtrl">
+
+<p>Looping with objects:</p>
+<ul>
+  <li ng-repeat="x in names | orderBy:'country'">
+    {{ x.name + ', ' + x.country }}
+  </li>
+</ul>
+
+</div>
+
+<script src="js/namesController.js"></script>
+
+</body>
+</html>

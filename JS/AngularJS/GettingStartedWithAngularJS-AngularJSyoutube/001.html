@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title></title>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script> -->
+	<script type="text/javascript" src="../angular-1.4.3/angular.min.js"></script>
+   	<script type="text/javascript" src="js/todo.js"></script>
+	<link rel="stylesheet" type="text/css" href="../bootstrap-3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/todo.css">
+</head>
+<body>
+<div ng-controller="TodoCtrl">
+    <h2>{{getTotalTodos()}}</h2>
+    <ul class="list-unstyled">
+    	<li ng-repeat="todo in todos">
+    		<input type="checkbox" ng-model="todo.done" />
+    		<span class="done-{{todo.done}}">{{todo.text}}</span>
+    	</li>
+    </ul>
+    <form class="form-horizontal">
+    	<input type="text" ng-model="formTodoText">
+    	<button class="btn" ng-click="addTodo()">
+    		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+    	</button>
+    </form>
+
+    <button class="btn-lg" ng-click="clearCompleted()">
+    	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Clear Completed
+    </button>
+</div>
+</body>
+</html>
