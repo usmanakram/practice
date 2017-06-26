@@ -1,0 +1,27 @@
+CREATE TABLE `salary` (
+  `empid` INT(11) NOT NULL,
+  `sal` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`empid`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+// Create user
+CREATE USER 'tr'@'localhost' IDENTIFIED BY 'mypass';
+
+// Grant privileges
+GRANT EXECUTE ON stored_procedure.*  TO tr@localhost
+GRANT EXECUTE ON stored_procedure.*  TO tr@`%`
+
+
+// Create Stored Procedure
+DELIMITER $$
+
+CREATE PROCEDURE `avg_sal`(OUT avg_sal DECIMAL)
+BEGIN
+    SELECT AVG(sal) INTO avg_sal FROM salary;
+
+END
+
+
+// Call stored procedure
+call avg_sal(@out);
+select @out;
