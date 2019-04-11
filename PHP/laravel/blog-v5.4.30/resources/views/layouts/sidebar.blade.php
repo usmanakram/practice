@@ -9,7 +9,8 @@
             
             @foreach ($archives as $stats)
                 <li>
-                    <a href="/public/posts?month={{ $stats['month'] }}&year={{ $stats['year'] }}">
+                    {{-- <a href="/public/posts?month={{ $stats['month'] }}&year={{ $stats['year'] }}"> --}}
+                    <a href="{{ url('posts?month=' . $stats['month'] . '&year=' . $stats['year']) }}">
                         {{ $stats['month'] . ' ' . $stats['year'] }}
                     </a>
                 </li>

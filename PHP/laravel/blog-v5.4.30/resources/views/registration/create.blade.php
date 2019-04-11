@@ -5,7 +5,8 @@
 	<div class="col-md-8">
 		<h1>Register</h1>
 
-		<form method="POST" action="/public/register">
+		{{-- <form method="POST" action="/public/register"> --}}
+		<form method="POST" action="{{ url('register') }}">
 			{{ csrf_field() }}
 
 			<div class="form-group">

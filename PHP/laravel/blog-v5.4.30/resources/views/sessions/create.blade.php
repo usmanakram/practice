@@ -5,7 +5,8 @@
 	<div class="col-md-8">
 		<h1>Sign In</h1>
 
-		<form action="/public/login" method="POST">
+		{{-- <form action="/public/login" method="POST"> --}}
+		<form action="{{ url('login') }}" method="POST">
 			{{ csrf_field() }}
 		
 			<div class="form-group">

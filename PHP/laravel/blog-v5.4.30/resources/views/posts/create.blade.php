@@ -8,7 +8,8 @@
 
 		<hr>
 
-		<form method="POST" action="/public/posts">
+		{{-- <form method="POST" action="/public/posts"> --}}
+		<form method="POST" action="{{ url('posts') }}">
 			{{ csrf_field() }}
 			<div class="form-group">
 				<label for="title">Title:</label>
