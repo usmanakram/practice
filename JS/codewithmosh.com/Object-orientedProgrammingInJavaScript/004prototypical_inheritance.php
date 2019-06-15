@@ -1,0 +1,1 @@
+<script type="text/javascript" src="prototypical_inheritance.js"></script>
