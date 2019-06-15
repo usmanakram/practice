@@ -7,13 +7,17 @@ console.log('reached');
 
 // Factories
 
-// Factory Function
+// Factory Function (Camel Notation)
 function createCircle(radius) {
     return {
         // radius: radius,
         // after ES6, we can write it as
         radius,
-        draw: function() {
+        /*draw: function() {
+            console.log('draw');
+        },*/
+        // after ES6, we can write it as
+        draw() {
             console.log('draw');
         }
     };
@@ -28,9 +32,8 @@ circle.draw();
 
 // Constructors
 
-// Constructor Function
+// Constructor Function (Pascal Notation)
 function Circle(radius) {
-    console.log('this', this);
     this.radius = radius;
     this.draw = function() {
         console.log('draw');
@@ -57,7 +60,7 @@ When we use `new` keyword, three things happen
 
 // Functions are Objects
 
-Circle.call({}, 1);
+Circle.call({}, 1); // It's exactly like above expression ( new Circle(1); )
 Circle.apply({}, [1, 2, 3]);
 
 //////////////////////////////////////////////////////////////
