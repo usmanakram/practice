@@ -1,1 +1,1 @@
-<script type="text/javascript" src="006ES6_modules.js"></script>
+<script type="text/javascript" src="ES6_modules.js"></script>
