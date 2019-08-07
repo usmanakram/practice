@@ -1,0 +1,1086 @@
+JSX => JavaScript XML
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Setup (lesson2)
+
+To install react package, run the command
+    "npm i -g create-react-app@1.5.2"
+    For Mac, if permissions have not set properly, add "sudo" at start of the command
+Install two extentions in VS Code
+    1) Simple React Snippets
+    2) Prettier - Code formatter
+
+Go to "Preferences" -> "Settings" & add new setting 
+    "editor.formatOnSave": true
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Your First React App (lesson3)
+
+Run the command
+    "create-react-app react-app"
+
+    Install react without globally installing it
+    "npx create-react-app my-app"
+
+    It will install react as well as thrid party libraries. Here is the list
+    1) Development Server (light weight)
+    2) Webpack
+    3) Babel
+
+Go inside "react-app" directory and run following command to start development server at port 3000 
+    "npm start"
+
+Babel · The compiler for next generation JavaScript
+https://babeljs.io/repl
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Hello World! (lesson4)
+
+Remove everything from "src" directory
+Create new file named 'index.js' and put following lines in it
+
+// START
+import React from "react";
+import ReactDOM from "react-dom";
+
+// jsx expression
+const element = <h1>Hello World</h1>;
+console.log(element);
+
+ReactDOM.render(element, document.getElementById("root"));
+// END
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Custom Configs (lesson5)
+
+Inside "package.json", to simplyfy things, most of dependicies are not there.
+These complexities are hidden.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Modules (lesson20)
+
+When working with modules the objects we define in a module are private by default, that's why not accessible outside module.
+It means, our "Teacher" class is not visible to any other file/module in our application.
+In order to make it visible we have to make it public. 
+We do that by exporting this class to ourside. We export the class and import wherever we need it.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Named and Default Exports (lesson21)
+
+// We can export one or more objects from a given module.
+
+There are two types of exports.
+1) named exports
+2) default exports
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Your First React Component (lesson23)
+
+Create a new project by running the command 
+    "create-react-app counter-app"
+Open VS Code terminal by hitting keys Control + backtick (`)
+Inside counter-app, run this command 
+    "npm i bootstrap@4.1.1"
+Now import bootstrap inside application, write following line to to import bootstrap 
+    import 'bootstrap/dist/css/bootstrap.css"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Your First React Component (lesson24)
+
+Create a new folder inside "counter-app/src" named "components"
+Create a new file (using camel notation) named "counter.jsx"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Embedding Expressions (lesson25)
+
+JSX expression must have one parent element. It means, we can not put two element side by side in JSX expression.
+If we not want to add an extra div as a parent element of two or more elements, we can add 
+React.Fragment
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Embedding Expressions (lesson26)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Setting Attributes (lesson27)
+
+Image src:
+    <img src="" alt="" />
+    Inside quotes of "src" of "img" tag, whatever we will type will be rendered as plain static text.
+"class" attribute of html element:
+    For adding class attribute to any element, we have to use "className" keyword instead of "class",
+    as it is a reserve keyword of JavaScript.
+"style" attribute of html element:
+    We need to have plain JavaScript object. Properties of this object are css properties in camel case
+    notation.
+    We will put simple numarical value like 10 and react will automatically convert this to something like '10px'
+
+    There is another way to apply style. Inside curly braces, we cay just pass an object litteral.
+    With this method, we will have double curly braces.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Rendering Classes Dynamically (lesson28)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Rendering Lists (lesson29)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Conditional Rendering (lesson30)
+
+Unlike Angular, we don't have "if" & "else", because, jsx is not templating engine.
+In JavaScript, unlike other programming languages, we can apply logical AND ( && ) between non boolean values.
+If the last operand in conditional expression is falsy (other than boolean), it will return that operand.
+
+console.log(true && false); // false
+console.log(true && 'Hi'); // "Hi"
+console.log(true && 'Hi' && 1); // 1
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Handling Events (lesson31)
+
+To bind a function with DOM element, we just pass reference instead of call that function.
+    Example: onClick={this.handleIncrement}
+    We didn't add parentheses.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Binding Event Handlers (lesson32)
+
+"this" is undefined inside functions
+There are two ways to solve "this" isse
+    1) bind inside constructor function
+    2) convert the method into arrow function
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Updating the State (lesson33)
+
+Unlike Angular, we have to explicitely tell Reat what is changed (in DOM).
+setState() is the method to tell the React. 
+We need to pass an argument as an object and the properties of this object will be merged in what we have in "state" object 
+or it will overwrite those properties if they already exist.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// What Happens When State Changes (lesson34)
+
+What exactly happen under the hood when we click the "increment" button ?
+We added setState() method inside "handleIncrement()". setState() tells React the state of this component is going to change.
+React will then scheduale a call to the render() method. So sometime in futue this method will be called, we don't know when. 
+This is an asynchronous call. render() method, as we can see, renders new React element, that is "div", in our example, which 
+contains all elements. This react element (div) has two children "span" & "button".
+So, in virtual DOM is a tree of 3 elements, a react element on the top (div) with two children "span" & "button". It's a new 
+virtual DOM, we also have an old virtual DOM. React compares these 2 DOMs side by side and figure out which DOM element has 
+been modified. In our example, it's "span". React reaches out to real browser DOM and update the corresponding "span" so it 
+matches one we have in virtual DOM. Nobody else in the DOM is updated, only that "span" element.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Passing Event Arguments (lesson35)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Setting Up the Vidly Project (lesson36)
+
+Create a new project by running command "create-react-app vidly".
+Go inside "vidly" directory and install 2 libraries.
+1) bootstrap
+2) font awesome
+    Run command "npm i bootstrap@4.1.1 font-awesome@4.7.0"
+Import both libraries in "index.js"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Building the Movies Component (lesson38)
+
+table.table>thead>tr>th*4
+this technique is called zencoding.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Conditional Rendering (lesson40)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Composing Components (lesson43)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Passing Data to Components (lesson44)
+
+Every React component has a property called "props".
+
+Example:
+    {this.state.counters.map(counter => (
+        <Counter key={counter.id} value={counter.value} selected={true}  />
+    ))}
+
+In the example above, "value" & "selected" attributes are the properties of "props" object of "Counter" component. "key" will not be part of that 
+because it is a special attribute for uniquely identifying elements.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Passing Children (lesson45)
+
+There is a special "props" called "children". We use that when we pass something between the opening and closing tag of an element.
+Example:
+    {this.state.counters.map(counter => (
+        <Counter key={counter.id} value={counter.value} selected={true}>
+            <h4>Title</h4>
+        </Counter>
+    ))}
+
+In the example above, "<h4>Title</h4>" is "children" and we can access it inside "Counter" component simply 
+    "this.props.children"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Debugging React Apps (lesson46)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Prop vs State (lesson47)
+
+"props" include data that we give to a component whereas "state" includes data that is local or private to that component.
+So, other components cannot access that state.
+
+Props is read only. It means, we cannot change input to the component inside that component.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// (lesson48)
+
+The component that owns a piece of the "state", should be the one modifying it.
+
+Example:
+class Counters extend Component {
+    state = {
+        counters: [
+            { id: 1, value: 4 },
+            { id: 1, value: 0 },
+            { id: 1, value: 0 },
+            { id: 1, value: 0 }
+        ]
+    };
+
+    handleDelete = counterId => {
+        console.log('Event Handler Called');
+        const counters = this.state.counters.filter(c => c.id !== counterId);
+        this.setState({ counters });
+    };
+
+    render() {
+        return (
+            <div>
+                {this.state.counters.map(counter => (
+                    <Counter key={counter.id} onDelete={this.handleDelete} value={counter.value} id={counter.id}  />
+                ))}
+            </div>
+        );
+    }
+}
+
+class Counter extends Component {
+    render() {
+        return (
+            <div>
+                <button onClick={ () => this.props.onDelete(this.props.id) }>Delete</button>
+            </div>
+        );
+    }
+}
+
+We have implemented "handleDelete()" method in "Counters" component and passed a reference to that method via "props" to the counter component.
+We have passed another prop based on the name of event. So the name of event is "onDelete" and we have passed the referene of delete function to child component.
+"Counter" component will raize event (onDelete) and "Counters" (its parent) component will handle this event (onDelete) by calling "handleDelete()" method.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Updating the State (lesson49)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Single Source of Truth (lesson50)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Removing the Local State (lesson51)
+
+A "controlled" components does not have it's own local state. It receives all the data via "props" and raises events 
+whenever data need to be changed. This component is entirely controlled by it's parent.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Multiple Components in Sync (lesson52)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Lifting State Up (lesson53)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Stateless Functional Components (lesson54)
+
+"this" only works in "class" components.
+In functional components, we need to add "props" as a parameter.
+React will pass the "props" object as an argument to this function at runtime.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Destructuring Arguments (lesson55)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Lifecycle Hooks (lesson56)
+
+There are few special methods that we can add to our components and React will automatically call these methods.
+We refer to these methods as lifecycle hooks. So, they allow us to hook into certain moments during the lifecycle 
+of a component and do something.
+
+Our components go through a few phases during their lifecycle.
+1) Mount Phase
+    It happens when instance of a component is created and insterted into the DOM.
+    In the mounting phase we have 3 lifecycle hooks.
+    i)      constructor
+    ii)     render
+    iii)    componentDidMount
+2) Update Phase
+    It happens when the "state" or "props" of a component get changed.
+    In this phase we have 2 lifecycle hooks.
+    i)  render
+    ii) componentDidMount
+3) Unmount Phase
+    This is when a component is removed from the DOM such as when we delete a counter.
+    i)  componentDidMount
+
+These lifecycle hooks are frequently used. In React document, there are some other hooks that they are rarely used.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Mounting Phase (lesson57)
+
+"constructor" is called once when an instance of class created. It'a a good place to initialize properties.
+
+We cannot call "this.setState()" inside constructor because this method can only be called when a component is rendered and placed in the DOM.
+Also, we don't have access to "this.props" inside constructor unless we pass "props" as a parameter to the constructor and also 
+pass it to the base class like this "super(props)". Otherwise "this.props" will return "undefined".
+
+"componentDidMount()" method is called after component render into the DOM. That's why, it's the perfect place to make 
+ajax calls to get data from server.
+When a componented is mounted that means that component is in the DOM.
+When a component is rendered all it's children also rendered recursively.
+
+We cannot use lifecycle hooks in stateless functional components, because here we have a single function that returns 
+the output of this component.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Updating Phase (lesson58)
+
+It happens whenever "state" or "props" updated.
+"componentDidUpdate()" method is called after a component is updated. Which means we have new "state" or "props". 
+So, we can compare new state with old state or new props with old props. And if there is a change, we can make 
+an ajax request to get new data from server.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Unmounting Phase (lesson59)
+
+"componentWillUnmount()" method is called just before a component is removed from the DOM.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Solution (lesson61)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Solution (lesson63)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Pagination (lesson68)
+
+Install "lodash" library by running command "npm i lodash@4.17.10"
+It is a popular JavaScript library with bunch of utility functions. 
+"lodash" is the optimized version of a popular JavaScript library called "underscore".
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Pagination (lesson71)
+
+In React, we used to have Type checking internally as part of the React library.
+But, starting from version 15 it has moved to a different package that we need to install separately.
+Install 
+    "npm i prop-types@15.6.2"
+
+Warnings popup only in development mode. When we deploy the application we will not see this.
+As you build components, specially reusable components, it is a good practice to use "PropTypes" to catch bugs related to type checking.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Filtering Displaying Items (lesson74)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Filtering Default Props (lesson75)
+
+Default "props"
+After defining component, define default props.
+Example:
+    ListGroup.defaultProps = {
+        textProperty: 'name',
+        valueProperty: '_id'
+    };
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Filtering Handling Selection (lesson76)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Raising the Soft Event (lesson80)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Sorting Adding the Sort Icon (lesson87)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Sorting Extracting Table (lesson88)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Sorting Extracting a Method (lesson89)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Destructuring Arguments (lesson90)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Setup (routing) (lesson93)
+
+user zip file provided in course content.
+Go to the following directory
+    /code/resources/Section 6- Routing/start/router-app
+Run the command
+    "npm i"
+Install a very useful extension in VS Code named "Auto Import - ES6, TS, JSX, TSX"
+With this, you can easily reference your components. And this plugin will automatically import them at top of your module.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Adding Routing (lesson94)
+
+For routing, install a library called 'react router dom' by running this command
+    "npm i react-router-dom@4.3.1"
+
+To add routing, there are 2 steps we need to follow.
+    1) import "BrowserRouter" component inside "index.js"
+    2) inside "index.js" wrap the "App" component in "BrowserRouter" component
+
+BrowserRouter grabs the "history" object in browsers and passes it down to component tree. Now, we can use history object anywhere in component tree.
+Next, we need to register a route. That basically means, we need to tell React, what component should be rendered based on given url.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Switch (lesson95)
+
+We can use "exact" attribute in "Route" component to load component only when path exactly same.
+
+There is another solution to solve this problem, "Switch" component.
+Switch renders first child that matches the location and all ignores all other components.
+It means, when we use Switch component we should order routes from the most specific ones to most generic ones.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Link (lesson96)
+
+By using above components, we are not able to create one page application. 
+All necessary files download again and again, whenever we click a link.
+We are going to develop Single Page Application (SPAs).
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Route Props (lesson97)
+
+Three "props" are automatically injected inside our component, when we use "Route" component.
+    history, location, match
+
+Refrence site: (react router)
+    https://reacttraining.com/react-router/core
+    https://reacttraining.com/react-router/core/guides/philosophy
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Passing Props (lesson98)
+
+We can pass props to called component using "render()" method.
+    <Route path="/products" render={() => <Products sortBy="newest" />} />
+
+This method will only pass our custom "props" like "sortBy". 
+Here is another way to pass custom & default props.
+    <Route path="/products" render={props => <Products sortBy="newest" {...props} />} />
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Route Parameters (lesson99)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Optional Route Parameters (lesson100)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Query String (lesson101)
+
+very popular npm package working with query string. Install it by running following command
+    "npm i query-string@6.1.0"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Redirects (lesson102)
+
+After defining all routes, we should add "Redirect" components to redirect user to "not found" page.
+    <Redirect to="not-found" />
+
+We can also redirect any specific route to another route.
+    <Redirect from="/messages" to="/posts" />
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Programmatic Navigation (lesson103)
+
+Redirect user to listing page after create/update form submission
+    this.props.history.push("/products");
+
+Redirect user to listing page after create/update form submission. User will not be able to go back to form by clicking browser back button.
+    this.props.history.replace("/products");
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// (lesson106)
+
+user zip file provided in course content.
+Go to the following directory
+    /code/resources/Section 6- Routing/start/vidly
+Run the command
+    "npm i"
+For routing, install a library called 'react router dom' by running this command
+    "npm i react-router-dom@4.3.1"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Forms (lesson111)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Building a Bootstrap Forms (lesson112)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Handling Form Submission (lesson113)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Refs (lesson114)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Controlled Elements (lesson115)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Handling Multiple Inputs (lesson116)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Common Errors (lesson117)
+
+"null" or "undefined" cannot be used as a value of controlled element.
+As a rule of thumb, whenever building forms we should initialized the properties of our "state" object 
+    either to 
+        1) empty string 
+        2) or value that we get from server
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Extracting a Reusable Input (lesson118)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Validation (lesson119)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// A Basic Validation Function (lesson120)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Displaying Validation Errors (lesson121)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Validation on Change (lesson122)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Joi (lesson123)
+
+There is very powerful validation library named "Joi". Google "npm joi"
+Run following command to install "joi"
+    "npm i joi-browser@13.4"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Validating a Form Using Joi (lesson124)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Validating a Field Using Joi (lesson125)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Disablind the Submit Button (lesson126)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Extracting a Reusable Form (lesson128)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Extracting Helper Rendering Methods (lesson129)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Calling Backend Services (lesson136)
+
+user zip file provided in course content.
+Go to the following directory
+    /code/Section 8- Calling Backend Services/start/http-app
+Run the command
+    "npm i"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// JSON Placeholder (lesson137)
+
+https://jsonplaceholder.typicode.com/
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// HTTP Clients (lesson138)
+
+1) Fetch API
+2) jQuery AJAX
+3) Axios
+
+Run "npm i axios@0.18"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Getting Data (lesson139)
+
+pending > resolved (success) OR rejected (failure)
+    const promise = axios.get("https://jsonplaceholder.typicode.com/posts");
+"promise" object has a method called "then()". With this method, we can get result of asynchronous operation.
+But, this is old way of doing thing.
+In modern JavaScript, we have a keyword called "await". We can use "await promose" and get the actual result.
+Whenever we use "await" keyword in a function we should decorate the fuction with "async" keyword.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Creating Data (lesson140)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Lifecycle of a Request (lesson141)
+
+Types of request & its use
+    1) GET for getting data
+    2) POST for creating data
+    3) PUT/PATCH for updating data
+        PATCH is used for update one or more properties
+        PUT is used for update all properties
+    4) DELETE for deleting data
+    5) OPTIONS cross domain request
+
+Code:
+    handleAdd = async () => {
+        const obj = { title: "a", body: "b" };
+        const { data: post } = await axios.post(apiEndpoint, obj);
+
+        const posts = [post, ...this.state.posts];
+        this.setState({ posts });
+    };
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Updating Data (lesson142)
+
+Code:
+    handleUpdate = async post => {
+        post.title = "UPDATED";
+        await axios.put(apiEndpoint + "/" + post.id, post);
+        // axios.patch(apiEndpoint + "/" + post.id, { title: post.title });
+
+        const posts = [...this.state.posts];
+        const index = posts.indexOf(post);
+        posts[index] = { ...post };
+        this.setState({ posts });
+    };
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Deleting Data (lesson143)
+
+Code:
+    handleDelete = async post => {
+        await axios.delete(apiEndpoint + "/" + post.id);
+
+        const posts = this.state.posts.filter(p => p.id !== post.id);
+        this.setState({ posts });
+    };
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Optimistic vs Pessimistic Updates (lesson144)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Expected and Unexpected Errors (lesson145)
+
+Expected (404: not found, 400: bad request) - CLIENT ERRORS
+    Display a specific error message
+
+Unexpected (network down, server down, database down, bug in application)
+    Log them
+    Display a generic and friendly error message
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Axios Interceptors (lesson146)
+
+With this implementation, whenever we have response with an error interceptor is called first then control is passed to "catch" block.
+Code:
+    axios.interceptors.response.use(null, error => {
+        console.log("INTERCEPTOR CALLED");
+        // To pass control back to catch block, we need to return a "rejected promise"
+        return Promise.reject(error);
+    });
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Extracting a Reusable HTTP Service (lesson147)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Extracting a Config Module (lesson148)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Displaying Toast Notifications (lesson149)
+
+Install toast by running following command
+    "npm i react-toastify@4.1"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Logging Errors (lesson150)
+
+Install it by running following command
+    "npm i raven-js@3.26.4"
+
+https://sentry.io/welcome/
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Extracting a Logging Service (lesson151)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Installing MongoDB on Mac (lesson153)
+
+Run following commands one by one
+    "brew install mongodb"
+    "sudo mkdir -p /data/db"
+    "sudo chown -R `id -un` /data/db"
+
+Now, we need to run mongo Demon. It's a service runs in the background and listens for connections on a given port.
+    "mongod"
+
+Install MongoDB Compass and connect database.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Installing MongoDB on Windows (lesson154)
+
+Go to mongodb site and download "Community Server" msi
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Setting Up the Backend (lesson155)
+
+user zip file provided in course content.
+Go to the following directory
+    /code/Section 8- Calling Backend Services/start/vidly-api-node
+    you can find this coder at github as well. https://github.com/mosh-hamedani/vidly-api-node
+Run the command
+    "npm i"
+Next, we need to seed database with some sample data. Run another command
+    "node seed.js"
+Start web(node) server by running following command
+    "node index.js"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Disabling Authentication (lesson156)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Adding HTTP and Logging Services (lesson158)
+
+Bring 2 services (http & log services) created in "http-app" section to "vidly" project.
+Go to the following directory
+    /code/Section 8- Calling Backend Services/start/vidly
+Run the command to install 2 modules "axios" & "toastify"
+    "npm i axios@0.18.0 react-toastify@4.1.0"
+Run the command
+    "npm i"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Replacing FakeMovieService (lesson160)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Extracting Config File (lesson161)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Refactoring (lesson164)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Saving the Movie (lesson165)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Authentication And Authorization (lesson167)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Registering a New User (lesson168)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Submitting the Registration Form (lesson169)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Hanndling Registration Errors (lesson170)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Logging in a User (lesson171)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Submitting the Login Form (lesson172)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Handling Login Errors (lesson173)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Storing the JWT (lesson174)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Logging in the User upon Registration (lesson175)
+
+Whitelist custome header in server response.
+    .header("access-control-expose-headers", "x-auth-token")
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// What is a JSON Web Token Really? (lesson176)
+
+https://jwt.io/
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Getting the Current User (lesson177)
+
+Install jwt decode library by running foloowing command
+    "npm i jwt-decode@2.2.0"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Showing the Current User on NavBar (lesson178)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Logging out the User (lesson179)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Refactoring (lesson180)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Calling Protected API Endpoints (lesson181)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+//  (lesson182)
+
+Get rid of bi-directional dependency
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Authorization (lesson183)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Showing or Hiding Elements (lesson184)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Protecting Routes (lesson185)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Redirecting after Login (lesson187)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Hiding the Delete Column (lesson189)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Deployment (lesson190)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Adding Environment Variables (lesson191)
+
+The expressions that reference an environment variable are replaced by the actual value of that environment variable during build time.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Building for Production (lesson192)
+
+"npm start" gives development build which is not optimized.
+Because, JavaScript bundle that it generates includes additional code that help us debug our application.
+For optimized production build run the command 
+    "npm run build"
+
+To test "build" we need to install an npm package named "serve". This is a simple light weight web server.
+    "npm install -g serve"
+To serve the content of build folder.
+    "serve -s build"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Getting Started with Heroku (lesson193)
+
+Go to 
+    https://devcenter.heroku.com/articles/heroku-cli
+Install it through Homebrew at Mac.
+Login by running following command
+    "heroku login"
+If you are behind a firewall that requires use of proxy to connect external http services. 
+If that's the case you need to set an environment variable before login. Run following command
+    For Mac, "export HTTP_PROXY=http://proxy.server.com:1234
+    For Windows, "set HTTP_PROXY=http://proxy.server.com:1234
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// MongoDB in the Cloud (lesson194)
+
+We use "mlab" to deploy mongodb database in cloud.
+    https://mlab.com
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Adding the Code to a Git Repository (lesson195)
+
+user zip file provided in course content.
+Go to the following directory
+    /code/Section 8- Calling Backend Services/start/vidly-api-node
+Create ".gitignore" file and write following line
+    node_modules/
+Now, initialize git repository by running following command
+    "git init"
+Set all file ready for commit by running following command.
+    "git add ."
+Now, commit using following command.
+    git commit -m "Initial commit"
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Deploying to Heroku (lesson196)
+
+user zip file provided in course content.
+Go to the following directory
+    /code/Section 8- Calling Backend Services/start/vidly-api-node
+Create Heroku app by running following command
+    "heroku create"
+
+Push code to remote heroku git repository by running following command.
+    "git push heroku master"
+Now, open it by running following command
+    "heroku open"
+We will find an error at this page. We will learn "how to view logs" in next lesson.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Viewing Logs (lesson197)
+
+We can view logs at heroku.com dashboard or by running following command.
+    "heroku logs"
+
+Go to /vidly-api-node/config/default.json. Change "db" value from local to live (cloud.mongodb.com)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Setting Environment Variables on Heroku (lesson198)
+
+Go to cloud.mongodb.com and copy the connection string.
+    mongodb+srv://vidlyuser:<password>@cluster0-wgcpx.azure.mongodb.net/test?retryWrites=true&w=majority
+    mongodb+srv://vidlyuser:1234@cluster0-wgcpx.azure.mongodb.net/test?retryWrites=true&w=majority
+
+    mongodb://vidlyuser:<password>@cluster0-shard-00-00-wgcpx.azure.mongodb.net:27017,cluster0-shard-00-01-wgcpx.azure.mongodb.net:27017,cluster0-shard-00-02-wgcpx.azure.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority
+    mongodb://vidlyuser:1234@cluster0-shard-00-00-wgcpx.azure.mongodb.net:27017,cluster0-shard-00-01-wgcpx.azure.mongodb.net:27017,cluster0-shard-00-02-wgcpx.azure.mongodb.net:27017/vidly?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority
+
+Go to terminal and create an environment variable named "vidly_db" and set it's value above connection string on "heroku"
+    "heroku config:set vidly_db=mongodb+srv://vidlyuser:1234@cluster0-wgcpx.azure.mongodb.net/test?retryWrites=true&w=majority"
+    "heroku config:set vidly_db=mongodb+srv://vidlyuser:1234@cluster0-wgcpx.azure.mongodb.net/vidly?retryWrites=true&w=majority"
+
+git add .
+git commit -m "Added support for reading connection string from an envionment variable"
+git push heroku master
+////////////////////////////////////////////////////////////////////////////////////
+
+// Preparing the Front-end for Deployment (lesson199)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Deploying the Front-end (lesson200)
+
