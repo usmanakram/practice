@@ -474,7 +474,7 @@ Example:
 
 // Setup (routing) (lesson93)
 
-user zip file provided in course content.
+use zip file provided in course content.
 Go to the following directory
     /code/resources/Section 6- Routing/start/router-app
 Run the command
@@ -575,7 +575,7 @@ Redirect user to listing page after create/update form submission. User will not
 
 // (lesson106)
 
-user zip file provided in course content.
+use zip file provided in course content.
 Go to the following directory
     /code/resources/Section 6- Routing/start/vidly
 Run the command
@@ -669,7 +669,7 @@ Run following command to install "joi"
 
 // Calling Backend Services (lesson136)
 
-user zip file provided in course content.
+use zip file provided in course content.
 Go to the following directory
     /code/Section 8- Calling Backend Services/start/http-app
 Run the command
@@ -835,7 +835,7 @@ Go to mongodb site and download "Community Server" msi
 
 // Setting Up the Backend (lesson155)
 
-user zip file provided in course content.
+use zip file provided in course content.
 Go to the following directory
     /code/Section 8- Calling Backend Services/start/vidly-api-node
     you can find this coder at github as well. https://github.com/mosh-hamedani/vidly-api-node
@@ -1021,7 +1021,7 @@ We use "mlab" to deploy mongodb database in cloud.
 
 // Adding the Code to a Git Repository (lesson195)
 
-user zip file provided in course content.
+use zip file provided in course content.
 Go to the following directory
     /code/Section 8- Calling Backend Services/start/vidly-api-node
 Create ".gitignore" file and write following line
@@ -1037,7 +1037,7 @@ Now, commit using following command.
 
 // Deploying to Heroku (lesson196)
 
-user zip file provided in course content.
+use zip file provided in course content.
 Go to the following directory
     /code/Section 8- Calling Backend Services/start/vidly-api-node
 Create Heroku app by running following command
