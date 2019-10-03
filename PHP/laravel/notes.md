@@ -1,6 +1,6 @@
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-## Routing
+# Routing
 
 
 Sometimes you may need to register a route that responds to multiple HTTP verbs. You may do so using the `match` method. Or, you may even register a route that responds to all HTTP verbs using the `any` method:
@@ -109,7 +109,7 @@ Route::middleware('auth:api', 'throttle:rate_limit,1')->group(function () {
 [Reference](https://laravel.com/docs/5.8/routing)
 
 
-## Middleware
+# Middleware
 
 
 #### Middleware Parameters
@@ -162,7 +162,7 @@ Note: read it
 [Reference](https://laravel.com/docs/5.8/middleware)
 
 
-## CSRF Protection
+# CSRF Protection
 
 
 ##### CSRF Tokens & JavaScript
