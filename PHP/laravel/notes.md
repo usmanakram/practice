@@ -1,7 +1,10 @@
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-# Routing
+- [Routing](#routing)
+- [Middleware](#middleware)
+- [CSRF Protection](#csrf-protection)
 
+# Routing
 
 Sometimes you may need to register a route that responds to multiple HTTP verbs. You may do so using the `match` method. Or, you may even register a route that responds to all HTTP verbs using the `any` method:
 
