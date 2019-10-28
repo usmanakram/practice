@@ -1,0 +1,29 @@
+////////////////////////////////////////////////////////////////////////////////////
+
+// Node Architecture (lesson 1.3)
+
+JavaScript Engines
+  Edge    => Chakra
+  Firefox => SpiderMonkey
+  Chrome  => V8
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Global Object (lesson 2.2)
+
+Inside node, "global" is equalent to "window" inside browser.
+Here is another difference between "global" and "window". User defined variables are not added in "global" as its property.
+  Example: 
+    var message = "good to see you";
+    console.log(global.message);
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Modules (lesson 2.3)
+
+Every node file is considered as a module. Variable & functions defined inside module are private to that module and not visible outside.
+If we need variable or function outside, we need to explicitly  export it and make it public.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Loading a Module (lesson 2.6)
