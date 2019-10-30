@@ -26,4 +26,15 @@ If we need variable or function outside, we need to explicitly  export it and ma
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-// Loading a Module (lesson 2.6)
+// Module WWrapper Function (lesson 2.6)
+
+(function (exports, require, module, __filename, __dirname) {
+
+})
+
+Node automatically put our each module inside wrapper function.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Events Module (lesson 2.10)
+
