@@ -50,3 +50,39 @@ Node automatically put our each module inside wrapper function.
 
 // HTTP Module (lesson 2.13)
 
+////////////////////////////////////////////////////////////////////////////////////
+
+// Building Your First Web Server (lesson 4.4)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Nodemon (lesson 4.5)
+
+For continuous watching changes in file & restarting server if any change found.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Environment Variables (lesson 4.6)
+
+To set environment
+  For Mac
+  $ export PORT=5000
+  For windows
+  $ set PORT=5000
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Route Parameters (lesson 4.7)
+
+app.get("/api/posts/:year/:month", (req, res) => {
+  // http://localhost:3000/api/posts/2018/3
+  res.send(req.params);
+
+  // http://localhost:3000/api/posts/2018/3?sortBy=name
+  res.send(req.query);
+});
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Handling HTTP GET Requests (lesson 4.8)
+
