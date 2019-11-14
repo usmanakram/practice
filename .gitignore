@@ -1,5 +1,4 @@
 node_modules
-package.json
 webpack.config.js
 package-lock.json
 .yo-rc.json
