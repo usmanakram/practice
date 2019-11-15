@@ -98,7 +98,46 @@ app.get("/api/posts/:year/:month", (req, res) => {
 ////////////////////////////////////////////////////////////////////////////////////
 5 - Express- Advanced Topics
 
-// 
+// Middleware (lesson 5.2)
+
+A middleware function is basically a function that takes a request object and  either return a response to the client or passes control to another middleware function.
+In Express, every route handler function is, technically, a middleware function.
+Another example of middleware function is 
+  app.use(express.json());
+  This method return a middleware functin. The job of this middleware function is to read the request and 
+  if there is json object in the body of the request it will parse the body of the request into json object.
+
+Request Processing Pipeline:
+ Every request pass through this pipeline. The pipeline consists of one or more middleware functions. 
+ Each middleware function either terminate the request response cycle, by returning response object, or it will pass control to another middleware function.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Creating Custom Middleware (lesson 5.3)
+
+app.use(function(req, res, next) {
+  console.log('Logging...');
+  next();
+});
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Built-in Middleware (lesson 5.4)
+
+// This middleware function parses incoming requrest with urlencoded payload.
+app.use(express.urlencoded({ extended: true }));
+
+/**
+ * With this middleware, we can server static content.
+ * http://localhost:3000/readme.txt
+ */
+app.use(express.static("public"));
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Third-party Middleware (lesson 5.5)
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
