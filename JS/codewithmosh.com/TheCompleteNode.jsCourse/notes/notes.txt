@@ -137,7 +137,69 @@ app.use(express.static("public"));
 
 // Third-party Middleware (lesson 5.5)
 
+Some useful third party middlewares
+helmet: to secure application by setting various http headers
+morgan: to log http requests in console or file
 
+////////////////////////////////////////////////////////////////////////////////////
+
+// Environments (lesson 5.6)
+
+We can check current environment by using environment variable of 
+  process.env.NODE_ENV
+  It returns "undefined", if environment variable has not been set
+
+Or we can use
+  app.get("env")
+  It returns "development", if environment variable has not been set.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Configuration (lesson 5.7)
+
+We can get environment variables inside "custom-environment-variables.json" file.
+
+config.get('mail.password');
+"config" object looks various sources to find value of passed argument.
+The source can be configuration file (.json file), it can be an environment variable, it can also be a command line argument.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Debugging (lesson 5.8)
+
+$ npm i debug
+
+To enable debugging we need to set environment variable (DEBUG) with the value of namespace.
+For setting environment variable, run following command in terminal
+  $ export DEBUG=app:startup
+Or we can enable multiple namespaces as
+  $ export DEBUG=app:startup,app:db
+  OR we can use wildcard. For all "app" namespace
+  $ export DEBUG=app:*
+
+There is a shorter way to set environment variable. We can set at the time of starting app.
+  $ DEBUG=app:db nodemon index.js
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Templating Engines (lesson 5.9)
+
+Packages:
+  Pug, Mustache, EJS
+
+Run $ npm i pug
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Database Integration (lesson 5.10)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Authentication (lesson 5.11)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Building Maintainable Routes (lesson 5.12)
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
