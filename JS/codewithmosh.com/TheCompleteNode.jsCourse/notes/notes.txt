@@ -296,11 +296,17 @@ In this case, result is not an array of all promises, rather it's the value of f
 
 // Async and Await (lesson 6.11)
 
-Watch tutorial again and put some notes here.
+Whenever you use the "await" operator in a function you need to decorate that function with "async" modifier.
+In this particular example, we have written "await" statements inside index.js outside of a function. 
+It is a requirement of JavaScript engine that whenever you use "await", you should have a function that is decorated with "async".
+Basically, async & await are build on top of promises. They are syntatical sugar in the language that allow us to write asynchronous code that looks synchronous.
+Internally, when JavaScript engine execute this(async/await) code it going to convert this code into promise-based code.
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 7- CRUD Operations Using Mongoose
+
+// Introducing MongoDB (lesson7.1)
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
