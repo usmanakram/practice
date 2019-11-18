@@ -248,7 +248,55 @@ console.log("After");
 
 // Named Function (lesson 6.5)
 
+Example is not clear
 
+////////////////////////////////////////////////////////////////////////////////////
+
+// Promise (lesson 6.6)
+
+A promise is an object that holds the eventual result of an asynchronous operation.
+Initially, it's in the pending state when we create this promise. Operation can be completed successfully or failed.
+If it completes successfully, we say the promise is resolved or fulfilled. And the state of this promise changes from pending to resolved (also called fulfilled).
+If asynchronous operation fails, the state of promise go from pending to rejected.
+We use "reject" functoin to retun an error to the consumer of this promise.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Replacing Calbacks with Promises (lesson 6.7)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Consuming Promises (lesson 6.8)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Creating Settled Promises (lesson 6.9)
+
+When rejecting promise, always use "Error()" object. Because, it displays call stack as well.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Parallel Promises (lesson 6.10)
+
+Promise.all();
+This method returns a new promise that will be resolved when all the promises of given array(as a param) will be resolved.
+
+Explaination:
+1) We don't have real concurrency or multi threading. 
+    We still have single thread whick is kicking off multiple asynchronous operations almost at the same time (not exactly at the same time).
+2) When we get the result, the result will be available as an array.
+3) If any of our promise is rejected then final promise is considered as rejected.
+
+Sometimes we want to kick off multiple asynchronous operation at the same time but we want to do something as soon as one of asynchronous operatoin is completes.
+For that we have another method available inside Promise class.
+"Promise.race()" instead of "Promise.all()"
+In this case, result is not an array of all promises, rather it's the value of first fulfilled promise.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Async and Await (lesson 6.11)
+
+Watch tutorial again and put some notes here.
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
