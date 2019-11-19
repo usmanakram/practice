@@ -309,6 +309,163 @@ Internally, when JavaScript engine execute this(async/await) code it going to co
 // Introducing MongoDB (lesson7.1)
 
 ////////////////////////////////////////////////////////////////////////////////////
+
+// Installing MongoDB on Mac (lesson7.2)
+
+Create folder for mongodb to store data
+  $ sudo mkdir -p /data/db
+
+Give proper permissions to the directory
+  $ sudo chown -R `id -un` /data/db
+
+Now run, MongoDemon. It's a service runs in background and listens for connections on given port.
+  $ mongod
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Installing MongoDB on Windows (lesson7.3)
+
+Create folder for mongodb to store data
+  $ md c:\data\db
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Connecting to MongoDB (lesson7.4)
+
+$ npm i mongoose
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Schemas (lesson7.5)
+
+In mongoose, we have this concept called schema. This is just specific to mongoose, it's not part of mongodb.
+We use schema in mongoose to define the shape of documents in a mongodb collection.
+
+Schema Types:
+  String, Number, Date, Buffer, Boolean, ObjectID, Array
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Models (lesson7.6)
+
+Now we need to compile schema into a model.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Saving a Document (lesson7.7)
+
+It's asynchronous operation.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Querying Documents (lesson7.8)
+
+The "Course" class that we have defined have a bunch of methods for querying documents.
+  .find() // To get the list of documents
+  .findById() // 
+  .findOne() // to fetch single document
+
+Sorting query documents.
+  For ascending order, use 1
+  For descending order, use -1
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Comparison Query Operators (lesson7.9)
+
+Here are the comparison operators that we have in mongodb.
+  eq  => equal
+  ne  => not equal
+  gt  => greater than
+  gte => greater than or equla to
+  lt  => less than
+  lte => less than or equal to
+  in
+  nin => not in
+
+Examples:
+  Find where price is 10
+    .find({ price: 10 })
+  
+  Find where price is greater than 10
+    .find({ price: { $gt: 10 } })
+  
+  Find where price between 10 & 20
+    .find({ price: { $gte: 10, $lte: 20 } })
+  
+  Find where price equal to 10 or 15 or 20
+    .find({ price: { $in: [10, 15, 20] } })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Logical Query Operators (lesson7.10)
+
+Here are the logical operators that we have in mongodb.
+  or
+  and
+
+Examples:
+  Find where "author" is "Usman" or "isPublished" is "true"
+    .find()
+    .or([ { author: 'Usman' }, { isPublished: true } ])
+  
+  Find where "author" is "Usman" and "isPublished" is "true"
+    .find()
+    .and([ { author: 'Usman' }, { isPublished: true } ])
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Regular Expressions (lesson7.11)
+
+In Patterns
+  ^   => string which start with something
+  $   => end of a string
+  i   => case insensitive
+  .*  => 0 or more characters (doesn't care which characters are there)
+
+Example:
+  Find where "author" starts with "Usman"
+    .find({ author: /pattern/ })
+    .find({ author: /^Usman/ })
+  
+  Find where "author" ends with "man"
+    .find({ author: /man$/ })
+  
+  Above examples are case-sensitive. For case-insensitive, add "i" after pattern
+    .find({ author: /man$/i })
+  
+  Find where "author" contains "Usman"
+    .find({ author: /.*Usman.*/ })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Counting (lesson7.12)
+
+To get count of fetched documents/records.
+  .find({ author: "Usman", isPublished: true })
+    .count();
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Pagination (lesson7.13)
+
+async function getCourses() {
+  const pageNumber = 2;
+  const pageSize = 10;
+
+  const courses = await Course.find({ author: "Usman", isPublished: true })
+    .skip((pageNumber -1) * pageSize)
+    .limit(pageSize)
+    .sort({ name: 1 })
+    .select({ name: 1, tags: 1 });
+  console.log(courses);
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Counting (lesson7.12)
+
+////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 8- Mongo - Data Validation
 
