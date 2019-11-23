@@ -104,7 +104,7 @@ A middleware function is basically a function that takes a request object and  e
 In Express, every route handler function is, technically, a middleware function.
 Another example of middleware function is 
   app.use(express.json());
-  This method return a middleware functin. The job of this middleware function is to read the request and 
+  This method return a middleware function. The job of this middleware function is to read the request and 
   if there is json object in the body of the request it will parse the body of the request into json object.
 
 Request Processing Pipeline:
@@ -461,13 +461,176 @@ async function getCourses() {
   console.log(courses);
 }
 
+Run docker container of mongo image:
+  $ docker run --name mongo-demo -p 27017:27017 -v <local storage>:/data/db -d mongo
+  Example:
+  $ docker run --name mongo-demo -p 27017:27017 -v /Volumes/Data/work/projects/git/usmanakram/Practice/JS/codewithmosh.com/TheCompleteNode.jsCourse/mongodb-files:/data/db -d mongo
+
 ////////////////////////////////////////////////////////////////////////////////////
 
-// Counting (lesson7.12)
+// Exercise (lesson7.14)
+
+mongoimport --db mongo-exercises --collection courses --drop --file exercise-data.json --jsonArray
+
+Task:
+  Get all courses
+    published,
+    having tag "backend", 
+    sort by name,
+    pick only name
+
+We have another syntax to sort result.
+Example:
+  Sort by name, ascending
+    .sort('name')
+  Sort by name, descending
+    .sort('-name')
+
+We have another syntax to pick specific column(s).
+  .select({ name: 1, author: 1 })
+  OR
+  .select("name author");
+
+Solution:
+const courses = await Course.find({ isPublished: true, tags: "backend" })
+  // .sort({ name: 1 })
+  .sort("name")
+  // .select({ name: 1, author: 1 })
+  .select("name author");
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Exercise (lesson7.15)
+
+Task:
+  Get all courses
+    published,
+    having tag "backend" Or "backend", 
+    sort by price descending,
+    pick only name, author and price
+
+Solution # 1:
+const courses = await Course
+  .find({ isPublished: true, tags: { $in: ['frontend', 'backend'] } })
+  .sort('-price')
+  .select('name author price');
+
+Solution # 2:
+const courses = await Course
+  .find({ isPublished: true })
+  .or([ { tags: 'frontend' }, { tags: 'backend' } ])
+  .sort('-price')
+  .select('name author price');
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Exercise (lesson7.16)
+
+Task:
+  Get all courses
+    published,
+    price $15 or greater,
+    or having work "by" in name
+
+Solution:
+const courses = await Course
+  .find({ isPublished: true })
+  .or([
+    { price: { $gte: 15 } }, 
+    { name: /.*by.*/i }
+    ])
+  .sort('-price')
+  .select('name author price');
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Updating a Document (lesson7.17)
+
+async function updateCourse(id) {
+  const course = await Course.findById(id);
+  if (!course) return;
+
+  course.isPublished = true;
+  course.author = 'Another Author';
+  
+  // OR
+  /*
+  course.set({
+    isPublished: true,
+    author: 'Another Author'
+  });
+  */
+
+  const result = await course.save();
+  console.log(result);
+}
+
+updateCourse('sfasdfads');
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Updating a Document - Update First (lesson7.18)
+
+async function updateCourse(id) {
+  const result = await Course.update({ _id: id }, {
+    $set: {
+      author: 'Usman',
+      isPublished: false
+    }
+  });
+  console.log(result);
+  
+  // OR
+  const course = await Course.findByIdAndUpdate(id, {
+    $set: {
+      author: 'Usman',
+      isPublished: false
+    }
+  },
+  { new: true } // For updated record
+  );
+
+  // returns original document/record
+  console.log(course);
+}
+
+updateCourse('sfasdfads');
+
+For getting updated record, pass third argument to findByIdAndUpdate() as { new: true }
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Removing Documents (lesson7.19)
+
+async function removeCourse(id) {
+  // To delete first record and return Promise then an object containing count of deleted records
+  const result =  await Course.deleteOne({ _id: id });
+
+  // To delete multiple records and return Promise then an object containing count of deleted records
+  const result =  await Course.deleteMany({ _id: id });
+
+  console.log(result);
+
+  // If we need to fetch deleted document
+  // if record does not exist, it returns null
+  const course = await Course.findByIdAndRemove(id);
+  console.log(course);
+}
+removeCourse('sfasdfads');
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 8- Mongo - Data Validation
+
+// Validation (lesson8.1)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Built-in Validators (lesson8.2)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Custom Validators (lesson8.3)
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
