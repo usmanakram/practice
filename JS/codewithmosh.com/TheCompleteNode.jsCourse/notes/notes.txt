@@ -628,9 +628,71 @@ removeCourse('sfasdfads');
 
 // Built-in Validators (lesson8.2)
 
+name: {
+  type: String,
+  required: true,
+  minlength: 5,
+  maxlength: 255
+  // match: /pattern/
+},
+category: {
+  type: String,
+  require: true,
+  enum: ["web", "mobile", "network"]
+},
+author: String,
+price: {
+  type: Number,
+  required: function() {
+    return this.isPublished;
+  },
+  min: 10,
+  max: 200
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 
 // Custom Validators (lesson8.3)
+
+tags: {
+  type: Array,
+  validate: {
+    validator: function(v) {
+      return v && v.length > 0;
+    },
+    message: "A course should have at least one tag."
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Async Validators (lesson8.4)
+
+Sometime validation logic may involve reading something from database or from a remote http service.
+In that case, we need async validator.
+
+tags: {
+  type: Array,
+  validate: {
+    isAsync: true,
+    validator: function(v, callback) {
+      setTimeout(() => {
+        /**
+          * Do some async work and when the result is ready, call "callback" with the result
+          */
+        const result = v && v.length > 0;
+        callback(result);
+      }, 4000);
+    },
+    message: "A course should have at least one tag."
+  }
+},
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Validation Errors (lesson8.5)
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
