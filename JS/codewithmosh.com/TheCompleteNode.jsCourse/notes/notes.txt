@@ -650,6 +650,15 @@ price: {
   max: 200
 }
 
+Validator specific to String:
+  minlength, maxlength, match (for regular expression), enum
+
+For Number:
+  min, max
+
+For Date:
+  min, max
+
 ////////////////////////////////////////////////////////////////////////////////////
 
 // Custom Validators (lesson8.3)
