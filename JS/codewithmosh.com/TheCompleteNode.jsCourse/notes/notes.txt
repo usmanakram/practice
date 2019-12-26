@@ -628,6 +628,9 @@ removeCourse('sfasdfads');
 
 // Built-in Validators (lesson8.2)
 
+Making conditionally property required.
+For that, we can use function but cannot use arrow function.
+
 name: {
   type: String,
   required: true,
@@ -662,6 +665,13 @@ For Date:
 ////////////////////////////////////////////////////////////////////////////////////
 
 // Custom Validators (lesson8.3)
+
+tags: [ String ]
+
+Example: Apply validation as every course should have atleast one tag.
+We cannot use "required" validator here. Because, with "required" we can simply pass an empty array and 
+that will be valid for mongoose library.
+So, here we need custom validator.
 
 tags: {
   type: Array,
@@ -700,6 +710,61 @@ tags: {
 ////////////////////////////////////////////////////////////////////////////////////
 
 // Validation Errors (lesson8.5)
+
+try {
+  const result = await course.save();
+  console.log(result);
+} catch (ex) {
+  // To log error messages in console
+  console.log(ex.message);
+  // OR
+  for (field in ex.errors) {
+    // For complete error object
+    console.log(ex.errors[field]);
+    // For only error message (property)
+    console.log(ex.errors[field].message);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// SchemaType Options (lesson8.6)
+
+With String type, we have some additional validations. Like
+lowercase:
+  string will be saved as lowercase.
+uppercase:
+  string will be saved as uppercase.
+trim:
+  string will be saved as trimmed.
+
+Example:
+
+category: {
+  type: String,
+  require: true,
+  enum: ["web", "mobile", "network"],
+  lowercase: true,
+  // uppercase: true,
+  trim: true
+}
+
+We can also define custom getters & setters.
+
+price: {
+  type: Number,
+  required: function() {
+    return this.isPublished;
+  },
+  min: 10,
+  max: 200,
+  get: v => Math.round(v),
+  set: v => Math.round(v)
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Project - Add Persistence to Genres API (lesson8.7)
 
 
 
