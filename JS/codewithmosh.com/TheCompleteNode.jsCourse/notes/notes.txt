@@ -763,14 +763,141 @@ price: {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
-
-// Project - Add Persistence to Genres API (lesson8.7)
-
-
-
-////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 9- Mongoose- Modeling Relationships between Connected Data
+
+// Modelling Relationships (lesson9.1)
+
+For relationships, we have two approaches
+  1) Using References (also called Normalization)
+  2) Using Embedded Documents (also called Denormalization)
+
+
+Trade off between query performance vs consistency
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Referencing Documents (lesson9.2)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Population (lesson9.3)
+
+const Author = mongoose.model("Author", new mongoose.Schema({
+  name: String, 
+  bio: String, 
+  website: String
+}));
+
+const Course = mongoose.model("Course", new mongoose.Schema({
+  name: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Author"
+  }
+}));
+
+async function listCourses() {
+  const courses = await Course.find()
+    .populate("author", "name -_id") // Joining "author" table and fetching only name & excluding "_id"
+    .populate("category", "name")
+    .select("name author");
+  console.log(courses);
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Embedding Document (lesson9.4)
+
+const authorSchema = new mongoose.Schema({
+  name: String,
+  bio: String,
+  website: String
+});
+
+const Author = mongoose.model("Author", authorSchema);
+
+const Course = mongoose.model("Course", new mongoose.Schema({
+  name: String,
+  author: {
+    type: authorSchema,
+    required: true
+  }
+}));
+
+async function updateAuthor(courseId) {
+  const course = await Course.findById(courseId);
+  course.author.name = "Usman Akram";
+  course.save();
+  // OR
+  const course = await Course.update(
+    { _id: courseId },
+    {
+      $set: {
+        "author.name": "Usman Akram"
+      }
+    }
+  );
+
+  // To remove property
+  const course = await Course.update(
+    { _id: courseId },
+    {
+      $unset: {
+        author: ""
+      }
+    }
+  );
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Using an Array of Sub-documents (lesson9.5)
+
+const authorSchema = new mongoose.Schema({
+  name: String,
+  bio: String,
+  website: String
+});
+
+const Author = mongoose.model("Author", authorSchema);
+
+const Course = mongoose.model("Course", new mongoose.Schema({
+  name: String,
+  authors: [authorSchema]
+}));
+
+async function createCourse(name, authors) {
+  const course = new Course({ name, authors });
+
+  const result = await course.save();
+  console.log(result);
+}
+
+async function addAuthor(courseId, author) {
+  const course = await Course.findById(courseId);
+  course.authors.push(author);
+  course.save();
+}
+
+async function removeAuthor(courseId, authorId) {
+  const course = await Course.findById(courseId);
+  const author = course.authors.id(authorId);
+  author.remove();
+  course.save();
+}
+
+createCourse("Node Course", [
+  new Author({ name: "Usman" }),
+  new Author({ name: "Zeeshan" })
+]);
+
+addAuthor("_id", new Author({ name: "John" }));
+removeAuthor("_id", "author_id");
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Project - Build the Movies API (lesson9.6)
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////

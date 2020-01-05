@@ -1,3 +1,5 @@
+# Video Link: https://www.youtube.com/watch?v=Dji9ALCgfpM
+
 # Print statement
 print "Enter a Value: "
 # Taking arguments as an integer
