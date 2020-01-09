@@ -1,0 +1,6 @@
+Video Link:
+	https://www.youtube.com/watch?v=GY7Ps8fqGdc&list=PLGLfVvz_LVvSngZQwrhYXlPnJf1zYqghI
+
+$ rails new readit -d mysql
+
+
