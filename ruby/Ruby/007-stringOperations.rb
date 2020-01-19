@@ -72,8 +72,13 @@ puts full_name.chomp('as')
 # To delete a specific character
 puts full_name.delete('a')
 
-puts full_name.split(//)
-puts full_name.split(/ /)
+# To split string into array having single character in each index of array
+name_array = full_name.split(//)
+puts name_array
+
+# To split string into array based on spaces
+name_array = full_name.split(/ /)
+puts name_array
 
 
 # To convert string into
