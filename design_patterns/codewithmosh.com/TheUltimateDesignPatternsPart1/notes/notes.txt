@@ -1,0 +1,99 @@
+////////////////////////////////////////////////////////////////////////////////////
+
+// 01 - Getting Started (5m)
+
+Q:	What are design patterns ?
+A:	Design Patterns are elegant solutions to repeating problems in software design. It shows you how you should 
+structure classes and how these classes should talk to each other.
+
+In this, series we will explore 23 design patterns.
+Book:
+	Design Patterns
+	Element of Reusable Object-Oriented Software
+	By GoF
+
+In this book, these 23 patterns are divided into 3 categories.
+	1. Creational
+		It's all about different ways to create objects
+	2. Structural
+		It's about relationship in these objects
+	3. Behavioural
+		interaction & communication between these objects
+
+By the way, these design patterns don't represent all the patterns in the world.
+There are many unofficial and undocumented patterns out there that you might find usefull in certain situations.
+But these 23 design patterns are the classic ones that ever software engineer must understand.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// 02 - The Essentials (33m)
+
+========
+Coupling
+========
+One of the main concept in Object Oriented Systems is coupling which determins how much a class is couppled or dependent on another class.
+
+To decrease dependency and create loosely couppled application, we can use interfaces.
+
+==========
+Interfaces
+==========
+An interface is a contract that specifies the capabilites that a class should provide.
+
+=============
+Encapsulation
+=============
+Encapsulation is more like bundling the data and methods within one uint/class and hiding the values or state of object inside the class.
+
+===========
+Abstraction
+===========
+Abstruction means we should reducing complexity by hiding unnecessary details from our classes.
+Following absctrction principle, we will 'private' all irrelevant properties and method for users.
+
+===========
+Inheritance
+===========
+
+============
+Polymorphism
+============
+It means many forms. It's basically the ability of an object to take on many forms.
+
+===
+UML
+===
+UML shorts/stands for "Unified Modeling Language".
+
+We will discuss 3 types of relationship in this course.
+1. Inheritance
+2. Composition
+3. Dependency
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// 03 - Momento Pattern (13m)
+
+We use this pattern for implementing undo mechanisms.
+
+Single Responsibility Principle (Every class should have single responsibility.)
+
+To build maintainable software, we should design our classes in such a way that thay have single responsibility.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// 04 - State Pattern (25m)
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
