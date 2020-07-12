@@ -24,11 +24,11 @@ Here is another difference between "global" and "window". User defined variables
 // Modules (lesson 2.3)
 
 Every node file is considered as a module. Variable & functions defined inside module are private to that module and not visible outside.
-If we need variable or function outside, we need to explicitly  export it and make it public.
+If we need variable or function outside, we need to explicitly export it and make it public.
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-// Module WWrapper Function (lesson 2.6)
+// Module Wrapper Function (lesson 2.6)
 
 (function (exports, require, module, __filename, __dirname) {
 
@@ -55,6 +55,16 @@ Node automatically put our each module inside wrapper function.
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 4 - Building RESTful API's Using Express
+
+// RESTful Services (lesson 4.2)
+
+GET     /api/customers
+GET     /api/customers/1
+PUT     /api/customers/1
+DELETE  /api/customers/1
+POST    /api/customers
+
+////////////////////////////////////////////////////////////////////////////////////
 
 // Building Your First Web Server (lesson 4.4)
 
@@ -92,7 +102,43 @@ app.get("/api/posts/:year/:month", (req, res) => {
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-// Handling HTTP GET Requests (lesson 4.8)
+// Handling HTTP POST Requests (lesson 4.9)
+
+`req.body.name`
+By default, the above live does not work.
+In order for this line to work, we need to enable parsing of json objects in the body of the request.
+Because, by default this feature is not enabled in express.
+
+To enable we need to add following line after we get the `app` object.
+
+app.use(express.json());
+
+Actually, we are adding middleware by adding above line.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Input Validation (lesson 4.11)
+
+const schema = {
+  name: Joi.string()
+    .min(3)
+    .required()
+};
+
+const result = Joi.validate(req.body, schema);
+
+if (result.error) {
+  res.status(400).send(result.error.details[0].message);
+  return;
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Handling HTTP PUT Requests (lesson 4.12)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Handling HTTP DELETE Requests (lesson 4.13)
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
@@ -128,10 +174,12 @@ app.use(function(req, res, next) {
 app.use(express.urlencoded({ extended: true }));
 
 /**
- * With this middleware, we can server static content.
+ * With this middleware, we can serve static content.
  * http://localhost:3000/readme.txt
  */
 app.use(express.static("public"));
+
+In the above example "public" is the directory name which contains static content.
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -151,7 +199,7 @@ We can check current environment by using environment variable of
 
 Or we can use
   app.get("env")
-  It returns "development", if environment variable has not been set.
+  It returns "development", if environment variable(process.env.NODE_ENV) has not been set.
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -188,6 +236,13 @@ Packages:
   Pug, Mustache, EJS
 
 Run $ npm i pug
+
+
+// By setting engine, express automatically load it. That's why, no need to require.
+app.set("view engine", "pug");
+
+// Setting directory to load views
+app.set("views", "./views"); // default directory is 'views'
 
 ////////////////////////////////////////////////////////////////////////////////////
 

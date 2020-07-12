@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /**
- * With this middleware, we can server static content.
+ * With this middleware, we can serve static content.
  * http://localhost:3000/readme.txt
  */
 app.use(express.static("public"));
