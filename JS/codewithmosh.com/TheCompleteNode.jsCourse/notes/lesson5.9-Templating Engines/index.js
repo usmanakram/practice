@@ -18,7 +18,7 @@ app.set("views", "./views"); // default
 /**
  * req.body.name
  * In order for this line to work, we need to enable parsing of json objects in the body of the request.
- * Because, by defautl this feature is not enabled in express.
+ * Because, by default this feature is not enabled in express.
  *
  * For that we are going to add a piece of middleware.
  */
