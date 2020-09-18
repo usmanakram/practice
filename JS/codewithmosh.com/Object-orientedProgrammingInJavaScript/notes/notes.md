@@ -14,7 +14,7 @@
 
 ### 1) Encapsulation:
 Uncle Bob says,
-> "the best function are those with no parameters"
+> "The best functions are those with no parameters"
 
 Using encapsulation, we group related variables and functions together, and this way we can reduce complexity. Now we can reuse this object in different parts of the program, or in different programs.
 
@@ -44,7 +44,7 @@ In OOP, polymorphism is a techique that allows us to get rid of long 'if/else' o
 ## // Object Literals (lesson 2.2)
 
 ```javascript
-const circle = {}; // Object litteral
+const circle = {}; // Object literal
 ```
 
 An object in javascript is essentially a collection of key/value pair.
@@ -62,7 +62,7 @@ const circle = {
 };
 ```
 
-Object litteral is a simple way to define an object. But, we can also define objects using factories and constructors.
+Object literal is a simple way to define an object. But, we can also define objects using factories and constructors.
 
 //////////////////////////////////////////////////////////////
 
@@ -88,7 +88,7 @@ function createCircle(radius) {
 const circle = createCircle(1);
 circle.draw();
 ````
-For Factory function, we should use Camel Notation
+For Factory function, we should use Camel Notation.
 
 ---
 //////////////////////////////////////////////////////////////
