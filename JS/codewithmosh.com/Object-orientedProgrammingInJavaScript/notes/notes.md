@@ -151,7 +151,11 @@ function Circle(radius) {
     console.log('draw');
   }
 }
+```
 
+When we declare a function, internally, it represented like below.
+
+```javascript
 const Circle1 = new Function('radius', `
 this.radius = radius;
 this.draw = function() {
@@ -164,168 +168,234 @@ const circle = new Circle1(1);
 const another = new Circle(1);
 ```
 
+Let's take a look
+```Javascript
 Circle.call({}, 1); // It's exactly like above expression ( new Circle(1); )
+```
+
+When we use `new`, internally, javascript calls `call()` method.
+
+We have another method same like above (`call()`), but accepts parameters in the form of array.
+
+```javascript
 Circle.apply({}, [1, 2, 3]);
-
-
-
+```
 
 //////////////////////////////////////////////////////////////
 
 ## Value vs Reference Types
 
+### Value Types (primitives)
+1. Number
+2. String
+3. Boolean
+4. Symbol
+5. undefined
+6. null
+
+### Reference Types (objects)
+1. Object
+2. Function
+3. Array
+
+Primitives are copied by value.
+Objects are copied by their reference.
+
 //////////////////////////////////////////////////////////////
 
 ## Adding/Removing Properties
 
+```javascript
 const circle2 = new Circle(10);
 circle2.location = { x: 1 };
 
 console.log(circle2);
+
 delete circle2.location;
 console.log(circle2);
+```
 
 //////////////////////////////////////////////////////////////
 
 ## Enumerationg Properties
 
-for (let key in circle2) {
-    if (typeof circle2[key] !== 'function')
-        console.log(key, circle2[key]);
+```javascript
+function Circle(radius) {
+  this.radius = radius;
+  this.draw = function() {
+    console.log('draw');
+  }
+}
+
+const circle = new Circle(10);
+
+for (let key in circle) {
+  // Print only keys
+  if (typeof circle[key] !== 'function')
+    console.log(key, circle[key]);
 }
 
 // Get all the keys in an array
-const keys = Object.keys(circle2);
+const keys = Object.keys(circle);
 console.log(keys);
 
 // Check, if an object has given property
-if ('radius' in circle2) {
-    console.log('Circle2 has a radius');
+if ('radius' in circle) {
+  console.log('Circle has a radius');
 }
+```
 
 //////////////////////////////////////////////////////////////
 
 ## Abstraction
 
-//////////////////////////////////////////////////////////////
+```javascript
+function Circle(radius) {
+  this.radius = radius;
 
-// Private Properties and Methods
+  this.defaultLocation = { x: 0, y: 0 };
+  this.computeOptimumLocation = function(factor) {
 
-function Circle2(radius) {
-    this.radius = radius;
+  }
 
-    let defaultLocation = { x: 0, y: 0 };
-    let computeOptimumLocation = function(factor) {
-
-    }
-
-    this.draw = function() {
-        computeOptimumLocation(0.1);
-        console.log('draw');
-    };
+  this.draw = function() {
+    this.computeOptimumLocation(0.1);
+    console.log('draw');
+  };
 }
 
-const circle3 = new Circle2(10);
-circle3.draw();
+const circle = new Circle(10);
+circle.draw();
+```
+
+Hide the details and expose only the essentials.
+
+//////////////////////////////////////////////////////////////
+
+## Private Properties and Methods
+
+```javascript
+function Circle(radius) {
+  this.radius = radius;
+
+  // Local variable
+  let defaultLocation = { x: 0, y: 0 };
+  let computeOptimumLocation = function(factor) {
+
+  }
+
+  this.draw = function() {
+    computeOptimumLocation(0.1);
+    console.log('draw');
+  };
+}
+
+const circle = new Circle(10);
+circle.draw();
+```
 
 //////////////////////////////////////////////////////////////
 
 ## Getters/Setters
 
-function Circle3(radius) {
-    this.radius = radius;
+Technically, local variables of objects are not private members of objects. Because, they are not inside objects, they are just local variables.
+But, from an object oriented point of view, we can refer to them as private members of the object.
 
-    let defaultLocation = { x: 0, y: 0 };
+If we need to get private members/local variables, one solution we have to write a method that return our required private member.
 
-    this.getDefaultLocation = function() {
-        return defaultLocation;
-    };
+```javascript
+function Circle(radius) {
+  this.radius = radius;
 
-    this.draw = function() {
-        console.log('draw');
-    };
+  let defaultLocation = { x: 0, y: 0 };
+
+  this.getDefaultLocation = function() {
+    return defaultLocation;
+  };
+
+  this.draw = function() {
+    console.log('draw');
+  };
 }
 
-function Circle4(radius) {
-    this.radius = radius;
+const circle = new Circle(10);
+circle.getDefaultLocation();
+circle.draw();
+```
 
-    let defaultLocation = { x: 0, y: 0 };
+We have another way to do this.
+```javascript
+function Circle(radius) {
+  this.radius = radius;
 
-    /* this.getDefaultLocation = function() {
-        return defaultLocation;
-    }; */
+  let defaultLocation = { x: 0, y: 0 };
 
-    this.draw = function() {
-        console.log('draw');
-    };
+  /*this.getDefaultLocation = function() {
+    return defaultLocation;
+  };*/
 
-    Object.defineProperty(this, 'defaultLocation', {
-        get: function() {
-            return defaultLocation;
-        },
-        set: function(value) {
-            if (!value.x || !value.y)
-                throw new Error('Invalid location.');
-            defaultLocation = value;
-        }
-    });
+  this.draw = function() {
+    console.log('draw');
+  };
+
+  Object.defineProperty(this, 'defaultLocation', {
+    get: function() {
+      return defaultLocation;
+    },
+    set: function(value) {
+      if (!value.x || !value.y)
+        throw new Error('Invalid location.');
+      defaultLocation = value;
+    }
+  });
 }
 
-const circle4 = new Circle4(10);
-console.log(circle4.defaultLocation);
-circle4.defaultLocation = { x: 2, y: 2};
+const circle = new Circle(10);
+console.log(circle.defaultLocation);
+circle.defaultLocation = { x: 2, y: 2};
+```
 
 //////////////////////////////////////////////////////////////
 
 ## Exercise
 
+```javascript
 function Stopwatch() {
-    let startTime, endTime, running, duration = 0;
+  let startTime, endTime, running, duration = 0;
 
-    this.start = function() {
-        if (running)
-            throw new Error('Stopwatch has already started.');
+  this.start = function() {
+    if (running)
+      throw new Error('Stopwatch has already started.');
 
-        running = true;
+    running = true;
+    startTime = new Date();
+  };
 
-        startTime = new Date();
-    };
-    this.stop = function() {
-        if (!running)
-            throw new Error('Stopwatch is not started.');
+  this.stop = function() {
+    if (!running)
+      throw new Error('Stopwatch is not started.');
 
-        running = false;
+    running = false;
+    endTime = new Date();
 
-        endTime = new Date();
+    const seconds = (endTime.getTime() - startTime.getTime()) / 1000;
+    duration += seconds;
+  };
 
-        const seconds = (endTime.getTime() - startTime.getTime()) / 1000;
-        duration += seconds;
-    };
-    this.reset = function() {
-        startTime = null;
-        endTime = null;
-        running = false;
-        duration = 0;
-    };
+  this.reset = function() {
+    startTime = null;
+    endTime = null;
+    running = false;
+    duration = 0;
+  };
 
-    Object.defineProperty(this, 'duration', {
-        // get: function() { return duration; }
-        // we can write it down as
-        get: () => duration
-    });
+  Object.defineProperty(this, 'duration', {
+    // get: function() { return duration; }
+    // we can write it down as
+    get: () => duration
+  });
 }
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 ---
 //////////////////////////////////////////////////////////////
