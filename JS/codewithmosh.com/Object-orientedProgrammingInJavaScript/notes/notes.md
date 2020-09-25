@@ -199,7 +199,7 @@ Circle.apply({}, [1, 2, 3]);
 3. Array
 
 Primitives are copied by value.
-Objects are copied by their reference.
+Objects are copied by their references.
 
 //////////////////////////////////////////////////////////////
 
@@ -473,6 +473,8 @@ let descriptor = Object.getOwnPropertyDescriptor(objectBase, 'toString');
 console.log(descriptor);
 ```
 
+When we create our own objects, we can set these attributes for our properties.
+
 ```javascript
 Object.defineProperty(person, 'name', {
   // By default, all these properties are true
@@ -493,8 +495,24 @@ console.log(person);
 
 ## Constructor Prototypes (lesson 3.5)
 
-Constructors also have a prototype property
-This is the object that will be used as the parent for objects created by constructor
+Constructors also have a prototype property.
+This is the object that will be used as the parent for objects created by constructor.
+
+```javascript
+function Circle(radius) {
+  this.radius = radius;
+}
+
+let myObj = {};
+
+Object.getPrototypeOf(myObj); // myObj.__proto__
+
+// myObj.__proto__ (prototype or parent of myObj)
+// Constructor.prototype
+
+// Constructors also have a prototype property.
+Circle.prototype // This is the object that will be used as the parent for objects created by the Circle constructor.
+```
 
 NOTE:
 Need to watch this video again.
@@ -517,7 +535,7 @@ const c2 = new Circle(1);
 
 If we want to have a large number of objects of Circle in the memory, we are going to waste a lot of memory by keeping copies of all these methods.
 
-Question: So what's the solution ?
+Question: So what's the solution?
 Answer: prototypical inheritance
 
 ```javascript
@@ -559,12 +577,14 @@ function Circle(radius) {
   }
 }
 
+const c1 = new Circle(1);
+
 // Prototype members
 Circle.prototype.draw = function() {
   console.log('draw');
 }
 
-const c1 = new Circle(1);
+c1.draw();
 
 // Object.keys() returns only instance members
 console.log(Object.keys(c1));
@@ -582,7 +602,7 @@ console.log(c1.hasOwnProperty('draw')); // false
 
 ## Avoid Extending the Built-in Objects (lesson 3.8)
 
-Don't modify objects you don't own!
+Don't modify objects you don't own (built in objects)!
 Don't add new methods or properties!
 Don't remove existing methods or properties!
 
@@ -600,6 +620,98 @@ Array.prototype.shuffle = function() {} // Not recommended
 //////////////////////////////////////////////////////////////
 # 04 Prototypical Inheritace
 //////////////////////////////////////////////////////////////
+
+## Creating your own Prototypical Inheritance (lesson 4.1)
+
+```javascript
+function Shape() {
+  // body...
+}
+
+Shape.prototype.duplicate = function() {
+  console.log('duplicate');
+}
+
+function Circle(radius) {
+  this.radius = radius;
+}
+
+// In javaScript, we have a method for creating an object with a given prototype.
+// This returns an object that inherits from shapeBase.
+Circle.prototype = Object.create(Shape.prototype);
+// So before this lien, our Circle.prototype was like this
+// Circle.prototype = Object.create(Object.prototype); // objectBase
+
+Circle.prototype.draw = function() {
+  console.log('draw');
+}
+
+const s = new Shape();
+const c = new Circle(1);
+```
+
+//////////////////////////////////////////////////////////////
+
+## Resetting the Constructor (lesson 4.2)
+
+Whenever reset the prototype, reset the constructor as well
+
+```javascript
+function Shape() {
+  // body...
+}
+
+Shape.prototype.duplicate = function() {
+  console.log('duplicate');
+}
+
+function Circle(radius) {
+  this.radius = radius;
+}
+
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle;
+// new Circle.prototype.constructor() => new Circle();
+
+Circle.prototype.draw = function() {
+  console.log('draw');
+}
+
+const s2 = new Shape();
+const c2 = new Circle(1);
+```
+
+NOTE:
+Need to watch this video again.
+
+//////////////////////////////////////////////////////////////
+
+## Calling the Super Constructor (lesson 4.3)
+
+```javascript
+function Shape(color) {
+  this.color = color;
+}
+
+Shape.prototype.duplicate = function() {
+  console.log('duplicate');
+}
+
+function Circle(radius, color) {
+  Shape.call(this, color);
+  this.radius = radius;
+}
+
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle;
+
+Circle.prototype.draw = function() {
+  console.log('draw');
+}
+
+const s3 = new Shape();
+const c3 = new Circle(1, 'red');
+```
 
 ---
 //////////////////////////////////////////////////////////////
