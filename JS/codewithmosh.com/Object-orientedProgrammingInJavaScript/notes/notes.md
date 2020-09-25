@@ -403,8 +403,7 @@ function Stopwatch() {
 
 ## Inheritance (lesson 3.1)
 
-Base/Super/Parent
-Derived/Sub/Child
+Base/Super/Parent, Derived/Sub/Child
 
 We refer to the inheritance as `IS-A` relationship.
 We say circle `IS-A` shape.
