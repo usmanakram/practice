@@ -438,12 +438,12 @@ A prototype is just a regular object in memory. There is nothing special about i
 const myArray = [];
 ```
 
-`myArray` derived from `arrayBase` that derived from `objectBase`
+`myArray` derived from `arrayBase` that derived from `objectBase`.
 This is what we call multi level inheritance.
 Similarly,
 `circle` inherits from `circleBase`, and `circleBase` inherits from `objectBase`.
 
-Every object in JavaScript except the root object has a prototype/parent
+Every object in JavaScript, except the root object, has a prototype/parent.
 Objects created by a given constructor will have the same prototype. So, all circle objects created by the `Circle` constructor will have the same prototype, and similarly, all arrays created by the array constructor will have the same prototype.
 
 //////////////////////////////////////////////////////////////
