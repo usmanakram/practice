@@ -333,11 +333,6 @@ function Circle(radius) {
   /*this.getDefaultLocation = function() {
     return defaultLocation;
   };*/
-
-  this.draw = function() {
-    console.log('draw');
-  };
-
   Object.defineProperty(this, 'defaultLocation', {
     get: function() {
       return defaultLocation;
@@ -348,6 +343,10 @@ function Circle(radius) {
       defaultLocation = value;
     }
   });
+
+  this.draw = function() {
+    console.log('draw');
+  };
 }
 
 const circle = new Circle(10);
