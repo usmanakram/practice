@@ -450,15 +450,23 @@ Objects created by a given constructor will have the same prototype. So, all cir
 
 ## Property Descriptors (lesson 3.4)
 
+```javascript
+let person = { name: 'Usman' };
+
+for (let key in person)
+  console.log(key);
+
+// OR
+console.log(Object.keys(person));
+```
+
 We cannot iterate properties defined inside builtin parents, like Object, Array etc. Because, those properties have attributes attached to them. Sometimes these attributes prevent a property from being enumerated.
+
+To get parent of `person` object.
+In console, we can get the same result by typing `person.__proto__`
 
 ```javascript
 let person = { name: 'Usman' };
-```
-
-To get parent of "person" object.
-In console, we can get the same result by typing `person.__proto__`
-```javascript
 let objectBase = Object.getPrototypeOf(person);
 let descriptor = Object.getOwnPropertyDescriptor(objectBase, 'toString');
 
@@ -468,16 +476,16 @@ console.log(descriptor);
 ```javascript
 Object.defineProperty(person, 'name', {
   // By default, all these properties are true
-  writable: false,
+  writable: false, // changeable
   enumerable: false, // visibility
   configurable: false // deletable
 });
 
-person.name = 'John';
+person.name = 'John'; // it will not update `name` as `writable` is `false`
 
 console.log(person);
-console.log(Object.keys(person));
-delete person.name;
+console.log(Object.keys(person)); // it will not print `name` as `enumerable` is `false`
+delete person.name; // it will not delete `name` as `configurable` is `false`
 console.log(person);
 ```
 
