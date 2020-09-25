@@ -425,7 +425,8 @@ let y = {};
 
 Object.getPrototypeOf(x) === Object.getPrototypeOf(y)
 
-x.__proto__ // Not recommended, it's depricated
+x.__proto__; // Not recommended, it's depricated
+Object.getPrototypeOf(x); // Recommended way to get prototype
 ```
 
 A prototype is just a regular object in memory. There is nothing special about it. Every object has a prototype or a parent, except the root object.
@@ -495,6 +496,106 @@ console.log(person);
 
 Constructors also have a prototype property
 This is the object that will be used as the parent for objects created by constructor
+
+NOTE:
+Need to watch this video again.
+
+//////////////////////////////////////////////////////////////
+
+## Prototype vs Instannce Members (lesson 3.6)
+
+```javascript
+function Circle(radius) {
+  this.radius = radius;
+  this.draw = function() {
+    console.log('draw');
+  }
+}
+
+const c1 = new Circle(1);
+const c2 = new Circle(1);
+```
+
+If we want to have a large number of objects of Circle in the memory, we are going to waste a lot of memory by keeping copies of all these methods.
+
+Question: So what's the solution ?
+Answer: prototypical inheritance
+
+```javascript
+function Circle(radius) {
+  // Instance members
+  this.radius = radius;
+  this.move = function() {
+    console.log('move');
+  }
+}
+
+// Prototype members
+Circle.prototype.draw = function() {
+  this.move();
+  console.log('draw');
+}
+
+const c1 = new Circle(1);
+const c2 = new Circle(1);
+
+// Overwrite builtin method
+Circle.prototype.toString = function() {
+  return 'Circle with radius ' + this.radius;
+}
+```
+
+//////////////////////////////////////////////////////////////
+
+## Iterating Instance and Prototype Members (lesson 3.7)
+
+It does not matter when we change prototype. We can also change prototype after creating an object. Changes will be reflected, because, here we are dealing with object references. So we have a single object in memory, as soon as we modify that, all the changes are immediately visile.
+
+```javascript
+function Circle(radius) {
+  // Instance members
+  this.radius = radius;
+  this.move = function() {
+    console.log('move');
+  }
+}
+
+// Prototype members
+Circle.prototype.draw = function() {
+  console.log('draw');
+}
+
+const c1 = new Circle(1);
+
+// Object.keys() returns only instance members
+console.log(Object.keys(c1));
+
+// Returns all members (instance + prototype)
+// instance properties are commonly known as own properties
+for (let key in c1) console.log(key);
+
+// Instance/own property can be checked by using hasOwnProperty()
+console.log(c1.hasOwnProperty('radius')); // true
+console.log(c1.hasOwnProperty('draw')); // false
+```
+
+//////////////////////////////////////////////////////////////
+
+## Avoid Extending the Built-in Objects (lesson 3.8)
+
+Don't modify objects you don't own!
+Don't add new methods or properties!
+Don't remove existing methods or properties!
+
+```javascript
+Array.prototype.shuffle = function() {} // Not recommended
+```
+
+//////////////////////////////////////////////////////////////
+
+## Exercise & Solution (lesson 3.10 & 3.11)
+
+> "Premature optimization is the root of all evils."
 
 ---
 //////////////////////////////////////////////////////////////
