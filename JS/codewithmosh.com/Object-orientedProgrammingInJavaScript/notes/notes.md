@@ -403,15 +403,45 @@ function Stopwatch() {
 
 ## Inheritance (lesson 3.1)
 
+Base/Super/Parent
+Derived/Sub/Child
+
+We refer to the inheritance as `IS-A` relationship.
+We say circle `IS-A` shape.
+
+But, in javascript, we don't have classes, we only have objects. So that's when prototypical inheritance comes in the picture.
+So essentially, we have two types of inheritance, `classical` and `prototypical`.
+
 //////////////////////////////////////////////////////////////
 
 ## Prototypes and Prototypical Inheritance (lesson 3.2)
+
+We refer to the shape object as the prototype of the circle. So a prototype is essentially a parent of another object.
+Every object in javascript, except only a single object, has a prototype or parent. And it inherits all the members defined in it's prototype.
+
+```javascript
+let x = {};
+let y = {};
+
+Object.getPrototypeOf(x) === Object.getPrototypeOf(y)
+
+x.__proto__ // Not recommended, it's depricated
+```
 
 A prototype is just a regular object in memory. There is nothing special about it. Every object has a prototype or a parent, except the root object.
 
 //////////////////////////////////////////////////////////////
 
 ## Multi-level Inheritance (lesson 3.3)
+
+```javascript
+const myArray = [];
+```
+
+`myArray` derived from `arrayBase` that derived from `objectBase`
+This is what we call multi level inheritance.
+Similarly,
+`circle` inherits from `circleBase`, and `circleBase` inherits from `objectBase`.
 
 Every object in JavaScript except the root object has a prototype/parent
 Objects created by a given constructor will have the same prototype. So, all circle objects created by the `Circle` constructor will have the same prototype, and similarly, all arrays created by the array constructor will have the same prototype.
