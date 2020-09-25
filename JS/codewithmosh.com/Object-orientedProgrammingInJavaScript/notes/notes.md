@@ -183,7 +183,7 @@ Circle.apply({}, [1, 2, 3]);
 
 //////////////////////////////////////////////////////////////
 
-## Value vs Reference Types
+## Value vs Reference Types (lesson 2.7)
 
 ### Value Types (primitives)
 1. Number
@@ -203,7 +203,7 @@ Objects are copied by their reference.
 
 //////////////////////////////////////////////////////////////
 
-## Adding/Removing Properties
+## Adding/Removing Properties (lesson 2.8)
 
 ```javascript
 const circle2 = new Circle(10);
@@ -217,7 +217,7 @@ console.log(circle2);
 
 //////////////////////////////////////////////////////////////
 
-## Enumerationg Properties
+## Enumerating Properties (lesson 2.9)
 
 ```javascript
 function Circle(radius) {
@@ -247,7 +247,7 @@ if ('radius' in circle) {
 
 //////////////////////////////////////////////////////////////
 
-## Abstraction
+## Abstraction (lesson 2.10)
 
 ```javascript
 function Circle(radius) {
@@ -272,7 +272,7 @@ Hide the details and expose only the essentials.
 
 //////////////////////////////////////////////////////////////
 
-## Private Properties and Methods
+## Private Properties and Methods (lesson 2.11)
 
 ```javascript
 function Circle(radius) {
@@ -296,7 +296,7 @@ circle.draw();
 
 //////////////////////////////////////////////////////////////
 
-## Getters/Setters
+## Getters/Setters (lesson 2.12)
 
 Technically, local variables of objects are not private members of objects. Because, they are not inside objects, they are just local variables.
 But, from an object oriented point of view, we can refer to them as private members of the object.
@@ -357,7 +357,7 @@ circle.defaultLocation = { x: 2, y: 2};
 
 //////////////////////////////////////////////////////////////
 
-## Exercise
+## Exercise & Solution (lesson 2.14 & 2.15)
 
 ```javascript
 function Stopwatch() {
@@ -401,6 +401,63 @@ function Stopwatch() {
 //////////////////////////////////////////////////////////////
 # 03 Prototypes
 //////////////////////////////////////////////////////////////
+
+## Inheritance (lesson 3.1)
+
+//////////////////////////////////////////////////////////////
+
+## Prototypes and Prototypical Inheritance (lesson 3.2)
+
+A prototype is just a regular object in memory. There is nothing special about it. Every object has a prototype or a parent, except the root object.
+
+//////////////////////////////////////////////////////////////
+
+## Multi-level Inheritance (lesson 3.3)
+
+Every object in JavaScript except the root object has a prototype/parent
+Objects created by a given constructor will have the same prototype. So, all circle objects created by the `Circle` constructor will have the same prototype, and similarly, all arrays created by the array constructor will have the same prototype.
+
+//////////////////////////////////////////////////////////////
+
+## Property Descriptors (lesson 3.4)
+
+We cannot iterate properties defined inside builtin parents, like Object, Array etc. Because, those properties have attributes attached to them. Sometimes these attributes prevent a property from being enumerated.
+
+```javascript
+let person = { name: 'Usman' };
+```
+
+To get parent of "person" object.
+In console, we can get the same result by typing `person.__proto__`
+```javascript
+let objectBase = Object.getPrototypeOf(person);
+let descriptor = Object.getOwnPropertyDescriptor(objectBase, 'toString');
+
+console.log(descriptor);
+```
+
+```javascript
+Object.defineProperty(person, 'name', {
+  // By default, all these properties are true
+  writable: false,
+  enumerable: false, // visibility
+  configurable: false // deletable
+});
+
+person.name = 'John';
+
+console.log(person);
+console.log(Object.keys(person));
+delete person.name;
+console.log(person);
+```
+
+//////////////////////////////////////////////////////////////
+
+## Constructor Prototypes (lesson 3.5)
+
+Constructors also have a prototype property
+This is the object that will be used as the parent for objects created by constructor
 
 ---
 //////////////////////////////////////////////////////////////
