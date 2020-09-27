@@ -1,5 +1,5 @@
 // Source: Object-oriented Programming in JavaScript | Mosh
-// Source Link: 
+// Source Link:
 
 //////////////////////////////////////////////////////////////
 
@@ -98,18 +98,18 @@ const draw = c4.draw;
 draw();
 
 /**
- * Now, in JavaScript we have a mode that is called strict mode. When we enable this mode, JavaScript engine will be 
- * most sensitive, so it will do more error checking if there are errors that silently fail. It's going to turn 
- * them into exceptions, and also it will change the behavior of "this" keyword in functions. We can enable the 
+ * Now, in JavaScript we have a mode that is called strict mode. When we enable this mode, JavaScript engine will be
+ * most sensitive, so it will do more error checking if there are errors that silently fail. It's going to turn
+ * them into exceptions, and also it will change the behavior of "this" keyword in functions. We can enable the
  * strict mode by adding a string on the top, 'use strict'.
- * 
- * When we enable the strict mode, if we call a method as a function, "this" by default will no longer point to 
+ *
+ * When we enable the strict mode, if we call a method as a function, "this" by default will no longer point to
  * the global object, it will be set to undefined
  */
 
 /**
- * By default, the body of classes are executed in the strict mode. So whenever we explicitly enable the strict mode 
- * on top of this file or not, JavaScript engine will execute the body of class on the strict mode, and this will 
+ * By default, the body of classes are executed in the strict mode. So whether we explicitly enable the strict mode
+ * on top of this file or not, JavaScript engine will execute the body of class on the strict mode, and this will
  * prevent us from accidentally modify the global object.
  */
 class Circle5 {
@@ -140,7 +140,7 @@ class Circle6 {
 	}
 
 	/**
-	 * In ES6, we have a new feature called computed property names. So we can add brackets, and inside of these brackets 
+	 * In ES6, we have a new feature called computed property names. So we can add brackets, and inside of these brackets
 	 * we add an expression. When that expression is evaluated, the resulting value will be used as the name of property or method.
 	 */
 	[_draw]() {
@@ -158,20 +158,20 @@ console.log(c6[key6]);
 
 /**
  * A weakMap is essentially a dictionary where keys are objects and values can be anything.
- * The reason we call them weakMap is because the keys are weak. 
+ * The reason we call them weakMap is because the keys are weak.
  * So if there are no references to these keys, they will be garbage collected.
  * Now inside of this structure, we are not going to set the radius property anymore,
  * instead we are going to work with this radius key map. We call the set method.
- * The first argument is the key, and you can see that the keys is an object, it cannot 
- * be a symbol. So here we passed "this" which represents the instance of circle object, 
- * that's our key. And for the value, I'm going to use this radius argument. 
- * Technically, we can access this radius private property if we can get access to this 
- * weakMap. But later I'm going to talk about modules, and you will see that we can hide 
- * this radius in a module, and only export the circle class, so imagine somewhere else in 
- * the code we get the circle class, we won't have access to this weakMap. And thie circle 
+ * The first argument is the key, and you can see that the keys is an object, it cannot
+ * be a symbol. So here we passed "this" which represents the instance of circle object,
+ * that's our key. And for the value, I'm going to use this radius argument.
+ * Technically, we can access this radius private property if we can get access to this
+ * weakMap. But later I'm going to talk about modules, and you will see that we can hide
+ * this radius in a module, and only export the circle class, so imagine somewhere else in
+ * the code we get the circle class, we won't have access to this weakMap. And thie circle
  * object doesn't have a radius property.
- * 
- * 
+ *
+ *
  */
 const _radius7 = new WeakMap();
 const _move = new WeakMap();

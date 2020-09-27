@@ -87,7 +87,7 @@ function createCircle(radius) {
 
 const circle = createCircle(1);
 circle.draw();
-````
+```
 For Factory function, we should use Camel Notation.
 
 //////////////////////////////////////////////////////////////
@@ -636,6 +636,30 @@ function Circle(radius) {
   this.radius = radius;
 }
 
+Circle.prototype.draw = function() {
+  console.log('draw');
+}
+
+const s = new Shape();
+const c = new Circle(1);
+```
+
+In this example, `c` object which inherits from `circleBase`, which is essentially `circle.prototype`. And this `circleBase` inherits from `objectBase`.
+Similarly, we have `s` which inherits from `shapeBase`, and this is the same object referenced by `shape.prototype`, and this object inherits from `objectBase`.
+
+```javascript
+function Shape() {
+  // body...
+}
+
+Shape.prototype.duplicate = function() {
+  console.log('duplicate');
+}
+
+function Circle(radius) {
+  this.radius = radius;
+}
+
 // In javaScript, we have a method for creating an object with a given prototype.
 // This returns an object that inherits from shapeBase.
 Circle.prototype = Object.create(Shape.prototype);
@@ -649,6 +673,8 @@ Circle.prototype.draw = function() {
 const s = new Shape();
 const c = new Circle(1);
 ```
+
+
 
 //////////////////////////////////////////////////////////////
 
@@ -716,6 +742,199 @@ const c3 = new Circle(1, 'red');
 ---
 //////////////////////////////////////////////////////////////
 # 05 ES6 Classes
+//////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////
+
+## Private Properties/Members Using Symbols
+
+Now, we have another primitive, called symbol.
+It is essentially a unique identifier. Every time we call this function, we get a new unique identifier. And, this is not a consturctor function.
+
+```javascript
+console.log(Symbol() === Symbol()); // false
+```
+
+```javascript
+const _radius = Symbol();
+const _draw = Symbol();
+
+class Circle {
+  constructor(radius) {
+    // this.radius = radius;
+    // this['radius'] = radius;
+    this[_radius] = radius; // We can also use `Symbol` as property name, instead of `string`
+  }
+
+  /**
+   * In ES6, we have a new feature called computed property names. So we can add brackets, and inside of these brackets
+   * we add an expression. When that expression is evaluated, the resulting value will be used as the name of property or method.
+   */
+  // draw() {}
+  [_draw]() {
+  }
+}
+
+const c = new Circle(1);
+console.log('Regular properties of Circle: ', Object.getOwnPropertyNames(c)); // []
+const key = Object.getOwnPropertySymbols(c)[0];
+console.log(c[key]); // 1
+```
+
+//////////////////////////////////////////////////////////////
+
+## Private Members Using WeakMaps
+
+A `weakMap` is essentially a dictionary where keys are objects and values can be anything. The reason we call them `weakMap` is because the keys are weak. So if there are no references to these keys, they will be garbage collected.
+
+Now, inside of this structure, we are not going to set the radius property anymore, instead we are going to work with this radius key map. We call the set method. The first argument is the key, and you can see that the keys is an object, it cannot be a symbol. So here we passed `this` which represents the instance of circle object, that's our key. And for the value, I'm going to use radius argument.
+Technically, we can access this radius private property if we can get access to this `weakMap`. But later I'm going to talk about modules, and you will see that we can hide this radius in a module, and only export the circle class, so imagine somewhere else in the code we get the circle class, we won't have access to this `weakMap`. And the circle object doesn't have a radius property.
+
+### Defining private properties & methods using separate weakMap
+```javascript
+const _radius = new WeakMap();
+const _move = new WeakMap();
+
+class Circle {
+  constructor(radius) {
+    // Defining private property
+    _radius.set(this, radius);
+
+    // Defining private method
+    _move.set(this, () => {
+      /**
+       * "this" is not going to be rebound / reset (due to arrow function)
+       * rather inherited from what we have in this constructor.
+       * So in this constructor, "this" references a Circle object
+       */
+      console.log('move', this);
+    });
+  }
+
+  draw() {
+    // Calling private method
+    _move.get(this)();
+
+    // To get value of circle property
+    console.log('getting radius property: ', _radius.get(this));
+  }
+}
+
+const c = new Circle(1);
+console.log(c.draw());
+```
+
+### Defining private properties & methods under single weakMap
+```javascript
+const privateProps = new WeakMap();
+
+class Circle {
+  constructor(radius) {
+    // Defining private properties & methods
+    privateProps.set(this, {
+      radius: radius,
+      move: () => {
+        console.log('move', this);
+      }
+    });
+  }
+
+  draw() {
+    // Calling private method
+    privateProps.get(this).move();
+
+    // To get value of circle property
+    console.log('getting radius property: ', privateProps.get(this).radius);
+  }
+}
+
+const c = new Circle(1);
+console.log(c.draw());
+```
+
+//////////////////////////////////////////////////////////////
+
+## Getters and Setters
+
+```javascript
+const _radius = new WeakMap();
+
+class Circle {
+  constructor(radius) {
+    _radius.set(this, radius);
+  }
+
+  // Before ES6
+  /*Object.defineProperty(this, 'radius', {
+    get: function() {
+
+    }
+  });*/
+  // After ES6
+  get radius() {
+    return _radius.get(this);
+  }
+
+  set radius(value) {
+    if (value <= 0) throw new Error('invalid radius');
+    _radius.set(this, value);
+  }
+
+}
+
+const c = new Circle(1);
+```
+
+//////////////////////////////////////////////////////////////
+
+## Inheritance
+
+```javascript
+class Shape {
+  constructor(color) {
+    this.color = color;
+  }
+  move() {
+    console.log('move');
+  }
+}
+
+class Circle extends Shape {
+  constructor(color, radius) {
+    super(color);
+    this.radius = radius;
+  }
+  draw() {
+    console.log('draw');
+  }
+}
+
+const c = new Circle('blue', 1);
+```
+
+//////////////////////////////////////////////////////////////
+
+## Method Overriding
+
+```javascript
+class Shape {
+  move() {
+    console.log('move');
+  }
+}
+
+class Circle extends Shape {
+  move() {
+    super.move();
+    console.log('circle move');
+  }
+}
+
+const c = new Circle();
+```
+
 //////////////////////////////////////////////////////////////
 
 ---
