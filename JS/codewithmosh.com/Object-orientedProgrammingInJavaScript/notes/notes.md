@@ -748,7 +748,7 @@ const c3 = new Circle(1, 'red');
 
 //////////////////////////////////////////////////////////////
 
-## Private Properties/Members Using Symbols
+## Private Properties/Members Using Symbols (lesson 5.5)
 
 Now, we have another primitive, called symbol.
 It is essentially a unique identifier. Every time we call this function, we get a new unique identifier. And, this is not a consturctor function.
@@ -785,14 +785,14 @@ console.log(c[key]); // 1
 
 //////////////////////////////////////////////////////////////
 
-## Private Members Using WeakMaps
+## Private Members Using WeakMaps (lesson 5.6)
 
-A `weakMap` is essentially a dictionary where keys are objects and values can be anything. The reason we call them `weakMap` is because the keys are weak. So if there are no references to these keys, they will be garbage collected.
+A `WeakMap` is essentially a dictionary where keys are objects and values can be anything. The reason we call them `WeakMap` is because the keys are weak. So if there are no references to these keys, they will be garbage collected.
 
 Now, inside of this structure, we are not going to set the radius property anymore, instead we are going to work with this radius key map. We call the set method. The first argument is the key, and you can see that the keys is an object, it cannot be a symbol. So here we passed `this` which represents the instance of circle object, that's our key. And for the value, I'm going to use radius argument.
-Technically, we can access this radius private property if we can get access to this `weakMap`. But later I'm going to talk about modules, and you will see that we can hide this radius in a module, and only export the circle class, so imagine somewhere else in the code we get the circle class, we won't have access to this `weakMap`. And the circle object doesn't have a radius property.
+Technically, we can access this radius private property if we can get access to this `WeakMap`. But later I'm going to talk about modules, and you will see that we can hide this radius in a module, and only export the circle class, so imagine somewhere else in the code we get the circle class, we won't have access to this `WeakMap`. And the circle object doesn't have a radius property.
 
-### Defining private properties & methods using separate weakMap
+### Defining private properties & methods using separate `WeakMap`
 ```javascript
 const _radius = new WeakMap();
 const _move = new WeakMap();
@@ -826,7 +826,7 @@ const c = new Circle(1);
 console.log(c.draw());
 ```
 
-### Defining private properties & methods under single weakMap
+### Defining private properties & methods under single `WeakMap`
 ```javascript
 const privateProps = new WeakMap();
 
@@ -856,7 +856,7 @@ console.log(c.draw());
 
 //////////////////////////////////////////////////////////////
 
-## Getters and Setters
+## Getters and Setters (lesson 5.7)
 
 ```javascript
 const _radius = new WeakMap();
@@ -889,7 +889,7 @@ const c = new Circle(1);
 
 //////////////////////////////////////////////////////////////
 
-## Inheritance
+## Inheritance (lesson 5.8)
 
 ```javascript
 class Shape {
@@ -916,7 +916,7 @@ const c = new Circle('blue', 1);
 
 //////////////////////////////////////////////////////////////
 
-## Method Overriding
+## Method Overriding (lesson 5.9)
 
 ```javascript
 class Shape {

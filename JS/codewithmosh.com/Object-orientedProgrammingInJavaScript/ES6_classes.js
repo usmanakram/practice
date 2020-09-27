@@ -157,8 +157,8 @@ console.log(c6[key6]);
 // Private Members Using WeakMaps
 
 /**
- * A weakMap is essentially a dictionary where keys are objects and values can be anything.
- * The reason we call them weakMap is because the keys are weak.
+ * A WeakMap is essentially a dictionary where keys are objects and values can be anything.
+ * The reason we call them WeakMap is because the keys are weak.
  * So if there are no references to these keys, they will be garbage collected.
  * Now inside of this structure, we are not going to set the radius property anymore,
  * instead we are going to work with this radius key map. We call the set method.
@@ -166,9 +166,9 @@ console.log(c6[key6]);
  * be a symbol. So here we passed "this" which represents the instance of circle object,
  * that's our key. And for the value, I'm going to use this radius argument.
  * Technically, we can access this radius private property if we can get access to this
- * weakMap. But later I'm going to talk about modules, and you will see that we can hide
+ * WeakMap. But later I'm going to talk about modules, and you will see that we can hide
  * this radius in a module, and only export the circle class, so imagine somewhere else in
- * the code we get the circle class, we won't have access to this weakMap. And thie circle
+ * the code we get the circle class, we won't have access to this WeakMap. And thie circle
  * object doesn't have a radius property.
  *
  *
@@ -179,7 +179,7 @@ const privateProps = new WeakMap();
 
 class Circle7 {
 	constructor(radius) {
-		/*START: Defining private properties & methods under single weakMap*/
+		/*START: Defining private properties & methods under single WeakMap*/
 		privateProps.set(this, {
 			radius: radius,
 			move: () => {
@@ -188,11 +188,11 @@ class Circle7 {
 		});
 
 		privateProps.get(this).radius;
-		/*END: Defining private properties & methods under single weakMap*/
+		/*END: Defining private properties & methods under single WeakMap*/
 
 
 
-		/*START: Defining private properties & methods using separate weakMap*/
+		/*START: Defining private properties & methods using separate WeakMap*/
 		// Defining private property
 		_radius7.set(this, radius);
 
@@ -205,7 +205,7 @@ class Circle7 {
 			 */
 			console.log('move', this);
 		});
-		/*START: Defining private properties & methods using separate weakMap*/
+		/*START: Defining private properties & methods using separate WeakMap*/
 	}
 
 	draw() {
