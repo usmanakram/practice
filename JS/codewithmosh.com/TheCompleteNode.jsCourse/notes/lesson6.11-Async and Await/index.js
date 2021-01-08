@@ -33,7 +33,7 @@ console.log("After");
 
 function getUser(id) {
   return new Promise((resolve, reject) => {
-    // Kicck off some async work
+    // Kick off some async work
     setTimeout(() => {
       console.log("Reading a user from database...");
       resolve({ id: id, gitHubUsername: "usman" });
